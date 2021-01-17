@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gene expression | Samuel David Gamboa-Tuz, Ph.D.</title>
+    <link>/tag/gene-expression/</link>
+      <atom:link href="/tag/gene-expression/index.xml" rel="self" type="application/rss+xml" />
+    <description>Gene expression</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2021</copyright><lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Gene expression</title>
+      <link>/tag/gene-expression/</link>
+    </image>
+    
+    <item>
+      <title>Visualization of Volcano Plots in R</title>
+      <link>/post/2020_volcano/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020_volcano/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;A &lt;strong&gt;volcano plot&lt;/strong&gt; is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&amp;rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the &lt;strong&gt;fold change&lt;/strong&gt; (either positive or negative) in the x axis and a &lt;strong&gt;significance value&lt;/strong&gt; (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.&lt;/p&gt;
+&lt;p&gt;In this post I&amp;rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in &lt;strong&gt;R&lt;/strong&gt; using tools from the &lt;strong&gt;tidyverse&lt;/strong&gt;, such as &lt;strong&gt;dplyr&lt;/strong&gt;, &lt;strong&gt;tidyr&lt;/strong&gt;, and &lt;strong&gt;ggplot2&lt;/strong&gt;. I assume the reader already knows the basics of R and has some familiarity with the tidyverse package.&lt;/p&gt;
+&lt;h2 id=&#34;r-packages-and-data&#34;&gt;R packages and data&lt;/h2&gt;
+&lt;p&gt;In addition to the tidyverse package, I&amp;rsquo;ll load the &lt;strong&gt;ggrepel&lt;/strong&gt; package to aid in the labeling of the genes. The example data comes from a &lt;a href=&#34;https://doi.org/10.1038/s41598-018-32904-2&#34;&gt;research article&lt;/a&gt; and can be downloaded &lt;a href=&#34;https://raw.githubusercontent.com/sdgamboa/misc_datasets/master/L0_vs_L20.tsv&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s load the packages and import the data:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# The packages can be installed within R with:
+# intstall.packages(c(&amp;quot;tidyverse&amp;quot;, &amp;quot;ggrepel&amp;quot;))
+
+# Load packages
+library(tidyverse)
+library(ggrepel)
+
+# A short function for outputting the tables
+knitr_table &amp;lt;- function(x) {
+  x %&amp;gt;% 
+    knitr::kable(format = &amp;quot;html&amp;quot;, digits = Inf, 
+                 format.args = list(big.mark = &amp;quot;,&amp;quot;)) %&amp;gt;%
+    kableExtra::kable_styling(font_size = 15)
+}
+
+
+# Import data
+data &amp;lt;- read_tsv(&amp;quot;https://raw.githubusercontent.com/sdgamboa/misc_datasets/master/L0_vs_L20.tsv&amp;quot;)
+dim(data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 20945     4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;head(data) %&amp;gt;% 
+ knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Genes &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; logFC &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; PValue &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; FDR &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 276_4 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.511825 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.597352e-61 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.345653e-57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 62_157 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.317522 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.982557e-54 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.312483e-50 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 144_7 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.203291 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.423896e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.692283e-49 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 198_6 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.022519 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.310041e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.733220e-49 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 829_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.867788 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981901e-51 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.249119e-47 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 44_124 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.906832 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981555e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.040811e-46 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The data contains four columns and 20,945 rows. Each row represents a gene. The column &amp;lsquo;Genes&amp;rsquo; contains the sequence names of each gene. The &amp;lsquo;logFC&amp;rsquo; column contains the logarithm base 2 (log2) of the fold change of each gene; up-regulated genes are positive, down-regulated genes are negative. The &amp;lsquo;PValue&amp;rsquo; and &amp;lsquo;FDR&amp;rsquo; columns contain the significance values; these must be converted to the negative of their logarithm base 10 before plotting, i.e -log10(p-value) or -log10(FDR). I&amp;rsquo;ll use the -log10(FDR) in this post.&lt;/p&gt;
+&lt;h2 id=&#34;a-simple-volcano-plot&#34;&gt;A simple volcano plot&lt;/h2&gt;
+&lt;p&gt;Since volacno plots are scatter plots, we can use &lt;code&gt;geom_point()&lt;/code&gt; to generate one with ggplot2. The conversion of the FDR values to their -log10 can be done at this step:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p1 &amp;lt;- ggplot(data, aes(logFC, -log(FDR,10))) + # -log10 conversion  
+  geom_point(size = 2/5) +
+  xlab(expression(&amp;quot;log&amp;quot;[2]*&amp;quot;FC&amp;quot;)) + 
+  ylab(expression(&amp;quot;-log&amp;quot;[10]*&amp;quot;FDR&amp;quot;))
+p1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/plot 1-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The dispersion of the points (representing genes) in the plot is similar to, you guessed, a volcano (that&amp;rsquo;s why they&amp;rsquo;re called volcano plots). Since the FDR values were transformed to their -log10, the higher the position of a point, the more significant its value is (y axis). Points with positive fold change values (to the right) are up-regulated and points with negative fold change values (to the left) are down-regulated (x axis).&lt;/p&gt;
+&lt;h2 id=&#34;adding-color-to-differentially-expressed-genes-degs&#34;&gt;Adding color to differentially expressed genes (DEGs)&lt;/h2&gt;
+&lt;p&gt;Differentially expressed genes (DEGs) are usally considered as those with an absolute fold change greater or equal to 2 and a FDR value of 0.05 or less. So, we can make our volcano plot a bit more informative if we add some color to the DEGs in the plot. To do so, we&amp;rsquo;ll add an additional column, named &amp;lsquo;Expression&amp;rsquo;, indicating whether the expression of a gene is up-regulated, down-regulated, or unchanged:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data &amp;lt;- data %&amp;gt;% 
+  mutate(
+    Expression = case_when(logFC &amp;gt;= log(2) &amp;amp; FDR &amp;lt;= 0.05 ~ &amp;quot;Up-regulated&amp;quot;,
+                           logFC &amp;lt;= -log(2) &amp;amp; FDR &amp;lt;= 0.05 ~ &amp;quot;Down-regulated&amp;quot;,
+                           TRUE ~ &amp;quot;Unchanged&amp;quot;)
+    )
+head(data) %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Genes &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; logFC &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; PValue &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; FDR &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 276_4 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.511825 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.597352e-61 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.345653e-57 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 62_157 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.317522 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.982557e-54 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.312483e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 144_7 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.203291 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.423896e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.692283e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 198_6 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.022519 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.310041e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.733220e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 829_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.867788 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981901e-51 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.249119e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 44_124 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.906832 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981555e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.040811e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;We can now map the column ´Expression&#39; to the color aesthetic of &lt;code&gt;geom_point()&lt;/code&gt; and color the points according to their expression classification:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p2 &amp;lt;- ggplot(data, aes(logFC, -log(FDR,10))) +
+  geom_point(aes(color = Expression), size = 2/5) +
+  xlab(expression(&amp;quot;log&amp;quot;[2]*&amp;quot;FC&amp;quot;)) + 
+  ylab(expression(&amp;quot;-log&amp;quot;[10]*&amp;quot;FDR&amp;quot;)) +
+  scale_color_manual(values = c(&amp;quot;dodgerblue3&amp;quot;, &amp;quot;gray50&amp;quot;, &amp;quot;firebrick3&amp;quot;)) +
+  guides(colour = guide_legend(override.aes = list(size=1.5))) 
+p2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If we want to know how many genes are up- or down-regulated, or unchanged, we can use dplyr&amp;rsquo;s &lt;code&gt;count()&lt;/code&gt; function.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;% 
+  count(Expression) %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; n &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2,559 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Unchanged &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 16,317 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2,069 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Since we already know that the genes towards the right are up-regulated and the genes towards the left are down-regulated, it would be more informative if we colored the points according to their significance level instead. Let&amp;rsquo;s create another column, named &amp;lsquo;Significance&amp;rsquo;, and classify the genes according to significance thresholds (0.05, 0.01, and 0.001):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data &amp;lt;- data %&amp;gt;% 
+  mutate(
+    Significance = case_when(
+      abs(logFC) &amp;gt;= log(2) &amp;amp; FDR &amp;lt;= 0.05 &amp;amp; FDR &amp;gt; 0.01 ~ &amp;quot;FDR 0.05&amp;quot;, 
+      abs(logFC) &amp;gt;= log(2) &amp;amp; FDR &amp;lt;= 0.01 &amp;amp; FDR &amp;gt; 0.001 ~ &amp;quot;FDR 0.01&amp;quot;,
+      abs(logFC) &amp;gt;= log(2) &amp;amp; FDR &amp;lt;= 0.001 ~ &amp;quot;FDR 0.001&amp;quot;, 
+      TRUE ~ &amp;quot;Unchanged&amp;quot;)
+  )
+head(data) %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Genes &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; logFC &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; PValue &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; FDR &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Significance &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 276_4 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.511825 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.597352e-61 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.345653e-57 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 62_157 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.317522 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.982557e-54 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.312483e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 144_7 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.203291 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.423896e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.692283e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 198_6 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.022519 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.310041e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.733220e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 829_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.867788 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981901e-51 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.249119e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 44_124 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.906832 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981555e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.040811e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Again, we can use the color aesthetic to map the color of the points to their corresponding significance thresholds:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p3 &amp;lt;- ggplot(data, aes(logFC, -log(FDR,10))) +
+  geom_point(aes(color = Significance), size = 2/5) +
+  xlab(expression(&amp;quot;log&amp;quot;[2]*&amp;quot;FC&amp;quot;)) + 
+  ylab(expression(&amp;quot;-log&amp;quot;[10]*&amp;quot;FDR&amp;quot;)) +
+  scale_color_viridis_d() +
+  guides(colour = guide_legend(override.aes = list(size=1.5))) 
+
+p3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And we can count how many genes are up- or down-regulated according to the different significance thresholds with &lt;code&gt;count()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;% 
+  count(Expression, Significance) %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Significance &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; n &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1,259 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.01 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 584 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.05 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 716 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Unchanged &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Unchanged &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 16,317 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 799 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.01 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 484 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.05 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 786 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;adding-labels-to-selected-genes&#34;&gt;Adding labels to selected genes&lt;/h2&gt;
+&lt;p&gt;If we labeled all of the genes, we&amp;rsquo;d end up with a plot with overcrowded labels that wouldn&amp;rsquo;t be possible to read. So, we could opt for labelling only the top n genes or a specific subset of them. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;top &amp;lt;- 10
+top_genes &amp;lt;- bind_rows(
+  data %&amp;gt;% 
+    filter(Expression == &#39;Up-regulated&#39;) %&amp;gt;% 
+    arrange(FDR, desc(abs(logFC))) %&amp;gt;% 
+    head(top),
+  data %&amp;gt;% 
+    filter(Expression == &#39;Down-regulated&#39;) %&amp;gt;% 
+    arrange(FDR, desc(abs(logFC))) %&amp;gt;% 
+    head(top)
+)
+top_genes %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Genes &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; logFC &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; PValue &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; FDR &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Significance &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 144_7 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.203291 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.423896e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.692283e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 829_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.867788 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981901e-51 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.249119e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 127_41 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.949102 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.453754e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.383209e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 31_39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.716666 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.415916e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.965636e-44 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 146_68 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.025068 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 5.433919e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.034668e-43 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 1078_1 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.749041 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.828288e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.100142e-43 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 836_2 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 9.113524 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.191834e-42 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.783070e-39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 5_110 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.568871 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.343958e-42 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.887894e-39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 1092_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.793138 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.344945e-41 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.728604e-38 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 81_91 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.948956 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.398732e-41 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.746655e-38 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 276_4 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.511825 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.597352e-61 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.345653e-57 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 62_157 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.317522 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.982557e-54 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.312483e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 198_6 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.022519 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.310041e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.733220e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 44_124 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.906832 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981555e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.040811e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 25_31 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.997426 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.545320e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.958453e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 12_195 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.943343 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.513410e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.967105e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 85_19 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -7.735937 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.215242e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.084819e-43 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 57_45 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -6.501718 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.355336e-42 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.892500e-39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 170_33 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -6.903067 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.518887e-42 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.988317e-39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 468_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.322243 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.156078e-40 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.210703e-37 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p3 &amp;lt;-  p3 +
+  geom_label_repel(data = top_genes,
+                   mapping = aes(logFC, -log(FDR,10), label = Genes),
+                   size = 2)
+p3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;So, only the top 10 up- and down-regulated genes are labeled, avoiding overcrowding.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In this post we applied two different color schemes on a volcano plot and labeled a few genes using tools from the tidyverse.&lt;/p&gt;
+&lt;h2 id=&#34;session-info&#34;&gt;Session info&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;info &amp;lt;- sessionInfo()
+toLatex(info, locale = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## \begin{itemize}\raggedright
+##   \item R version 4.0.3 (2020-10-10), \verb|x86_64-pc-linux-gnu|
+##   \item Running under: \verb|Ubuntu 20.04.1 LTS|
+##   \item Matrix products: default
+##   \item BLAS:   \verb|/usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0|
+##   \item LAPACK: \verb|/usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0|
+##   \item Base packages: base, datasets, graphics, grDevices, methods,
+##     stats, utils
+##   \item Other packages: dplyr~1.0.2, forcats~0.5.0, ggplot2~3.3.2,
+##     ggrepel~0.8.2, purrr~0.3.4, readr~1.3.1, stringr~1.4.0,
+##     tibble~3.0.3, tidyr~1.1.2, tidyverse~1.3.0
+##   \item Loaded via a namespace (and not attached): assertthat~0.2.1,
+##     backports~1.1.9, blob~1.2.1, blogdown~0.20, bookdown~0.20,
+##     broom~0.7.0, cellranger~1.1.0, cli~2.0.2, colorspace~1.4-1,
+##     compiler~4.0.3, crayon~1.3.4, curl~4.3, DBI~1.1.0, dbplyr~1.4.4,
+##     digest~0.6.25, ellipsis~0.3.1, evaluate~0.14, fansi~0.4.1,
+##     farver~2.0.3, fs~1.5.0, generics~0.0.2, glue~1.4.2, grid~4.0.3,
+##     gtable~0.3.0, haven~2.3.1, highr~0.8, hms~0.5.3, htmltools~0.5.0,
+##     httr~1.4.2, jsonlite~1.7.1, kableExtra~1.2.1, knitr~1.29,
+##     labeling~0.3, lifecycle~0.2.0, lubridate~1.7.9, magrittr~1.5,
+##     modelr~0.1.8, munsell~0.5.0, pillar~1.4.6, pkgconfig~2.0.3,
+##     R6~2.4.1, Rcpp~1.0.5, readxl~1.3.1, reprex~0.3.0, rlang~0.4.7,
+##     rmarkdown~2.3, rstudioapi~0.11, rvest~0.3.6, scales~1.1.1,
+##     stringi~1.4.6, tidyselect~1.1.0, tools~4.0.3, vctrs~0.3.4,
+##     viridisLite~0.3.0, webshot~0.5.2, withr~2.2.0, xfun~0.16,
+##     xml2~1.3.2, yaml~2.2.1
+## \end{itemize}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

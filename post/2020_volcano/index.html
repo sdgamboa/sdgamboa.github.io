@@ -1,0 +1,1824 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Samuel David Gamboa-Tuz">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="A short tutorial about how to make volcano plots in R.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2020_volcano/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#9d5323">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.df73572fc36e93285b13051ac8f5fa85.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/2020_volcano/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@samueldgamboa">
+  <meta property="twitter:creator" content="@samueldgamboa">
+  
+  <meta property="og:site_name" content="Samuel David Gamboa-Tuz, Ph.D.">
+  <meta property="og:url" content="/post/2020_volcano/">
+  <meta property="og:title" content="Visualization of Volcano Plots in R | Samuel David Gamboa-Tuz, Ph.D.">
+  <meta property="og:description" content="A short tutorial about how to make volcano plots in R."><meta property="og:image" content="/post/2020_volcano/featured.png">
+  <meta property="twitter:image" content="/post/2020_volcano/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-08-18T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-08-18T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/2020_volcano/"
+  },
+  "headline": "Visualization of Volcano Plots in R",
+  
+  "image": [
+    "/post/2020_volcano/featured.png"
+  ],
+  
+  "datePublished": "2020-08-18T00:00:00Z",
+  "dateModified": "2020-08-18T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Samuel David Gamboa-Tuz"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Samuel David Gamboa-Tuz, Ph.D.",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "A short tutorial about how to make volcano plots in R."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Visualization of Volcano Plots in R | Samuel David Gamboa-Tuz, Ph.D.</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7d92a95e871a711a5c03f82410d0fe5d.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Samuel David Gamboa-Tuz, Ph.D.</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Samuel David Gamboa-Tuz, Ph.D.</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Visualization of Volcano Plots in R</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span class="author-highlighted">
+      Samuel David Gamboa-Tuz</span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Aug 18, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 1200px; max-height: 857px;">
+  <div style="position: relative">
+    <img src="/post/2020_volcano/featured_hud11884b99cee2cd6c8a3d8db88a947dc_150935_1200x0_resize_lanczos_2.png" alt="" class="featured-image">
+    <span class="article-header-caption">A volcano plot.</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="introduction">Introduction</h2>
+<p>A <strong>volcano plot</strong> is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the <strong>fold change</strong> (either positive or negative) in the x axis and a <strong>significance value</strong> (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.</p>
+<p>In this post I&rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in <strong>R</strong> using tools from the <strong>tidyverse</strong>, such as <strong>dplyr</strong>, <strong>tidyr</strong>, and <strong>ggplot2</strong>. I assume the reader already knows the basics of R and has some familiarity with the tidyverse package.</p>
+<h2 id="r-packages-and-data">R packages and data</h2>
+<p>In addition to the tidyverse package, I&rsquo;ll load the <strong>ggrepel</strong> package to aid in the labeling of the genes. The example data comes from a <a href="https://doi.org/10.1038/s41598-018-32904-2">research article</a> and can be downloaded <a href="https://raw.githubusercontent.com/sdgamboa/misc_datasets/master/L0_vs_L20.tsv">here</a>.</p>
+<p>Let&rsquo;s load the packages and import the data:</p>
+<pre><code class="language-r"># The packages can be installed within R with:
+# intstall.packages(c(&quot;tidyverse&quot;, &quot;ggrepel&quot;))
+
+# Load packages
+library(tidyverse)
+library(ggrepel)
+
+# A short function for outputting the tables
+knitr_table &lt;- function(x) {
+  x %&gt;% 
+    knitr::kable(format = &quot;html&quot;, digits = Inf, 
+                 format.args = list(big.mark = &quot;,&quot;)) %&gt;%
+    kableExtra::kable_styling(font_size = 15)
+}
+
+
+# Import data
+data &lt;- read_tsv(&quot;https://raw.githubusercontent.com/sdgamboa/misc_datasets/master/L0_vs_L20.tsv&quot;)
+dim(data)
+</code></pre>
+<pre><code>## [1] 20945     4
+</code></pre>
+<pre><code class="language-r">head(data) %&gt;% 
+ knitr_table()
+</code></pre>
+<table class="table" style="font-size: 15px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Genes </th>
+   <th style="text-align:right;"> logFC </th>
+   <th style="text-align:right;"> PValue </th>
+   <th style="text-align:right;"> FDR </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 276_4 </td>
+   <td style="text-align:right;"> -10.511825 </td>
+   <td style="text-align:right;"> 1.597352e-61 </td>
+   <td style="text-align:right;"> 3.345653e-57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 62_157 </td>
+   <td style="text-align:right;"> -9.317522 </td>
+   <td style="text-align:right;"> 6.982557e-54 </td>
+   <td style="text-align:right;"> 7.312483e-50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 144_7 </td>
+   <td style="text-align:right;"> 12.203291 </td>
+   <td style="text-align:right;"> 2.423896e-53 </td>
+   <td style="text-align:right;"> 1.692283e-49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 198_6 </td>
+   <td style="text-align:right;"> -10.022519 </td>
+   <td style="text-align:right;"> 3.310041e-53 </td>
+   <td style="text-align:right;"> 1.733220e-49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 829_3 </td>
+   <td style="text-align:right;"> 11.867788 </td>
+   <td style="text-align:right;"> 2.981901e-51 </td>
+   <td style="text-align:right;"> 1.249119e-47 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 44_124 </td>
+   <td style="text-align:right;"> -8.906832 </td>
+   <td style="text-align:right;"> 2.981555e-50 </td>
+   <td style="text-align:right;"> 1.040811e-46 </td>
+  </tr>
+</tbody>
+</table>
+<p>The data contains four columns and 20,945 rows. Each row represents a gene. The column &lsquo;Genes&rsquo; contains the sequence names of each gene. The &lsquo;logFC&rsquo; column contains the logarithm base 2 (log2) of the fold change of each gene; up-regulated genes are positive, down-regulated genes are negative. The &lsquo;PValue&rsquo; and &lsquo;FDR&rsquo; columns contain the significance values; these must be converted to the negative of their logarithm base 10 before plotting, i.e -log10(p-value) or -log10(FDR). I&rsquo;ll use the -log10(FDR) in this post.</p>
+<h2 id="a-simple-volcano-plot">A simple volcano plot</h2>
+<p>Since volacno plots are scatter plots, we can use <code>geom_point()</code> to generate one with ggplot2. The conversion of the FDR values to their -log10 can be done at this step:</p>
+<pre><code class="language-r">p1 &lt;- ggplot(data, aes(logFC, -log(FDR,10))) + # -log10 conversion  
+  geom_point(size = 2/5) +
+  xlab(expression(&quot;log&quot;[2]*&quot;FC&quot;)) + 
+  ylab(expression(&quot;-log&quot;[10]*&quot;FDR&quot;))
+p1
+</code></pre>
+<p><img src="/post/2020_volcano/index_files/figure-html/plot 1-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>The dispersion of the points (representing genes) in the plot is similar to, you guessed, a volcano (that&rsquo;s why they&rsquo;re called volcano plots). Since the FDR values were transformed to their -log10, the higher the position of a point, the more significant its value is (y axis). Points with positive fold change values (to the right) are up-regulated and points with negative fold change values (to the left) are down-regulated (x axis).</p>
+<h2 id="adding-color-to-differentially-expressed-genes-degs">Adding color to differentially expressed genes (DEGs)</h2>
+<p>Differentially expressed genes (DEGs) are usally considered as those with an absolute fold change greater or equal to 2 and a FDR value of 0.05 or less. So, we can make our volcano plot a bit more informative if we add some color to the DEGs in the plot. To do so, we&rsquo;ll add an additional column, named &lsquo;Expression&rsquo;, indicating whether the expression of a gene is up-regulated, down-regulated, or unchanged:</p>
+<pre><code class="language-r">data &lt;- data %&gt;% 
+  mutate(
+    Expression = case_when(logFC &gt;= log(2) &amp; FDR &lt;= 0.05 ~ &quot;Up-regulated&quot;,
+                           logFC &lt;= -log(2) &amp; FDR &lt;= 0.05 ~ &quot;Down-regulated&quot;,
+                           TRUE ~ &quot;Unchanged&quot;)
+    )
+head(data) %&gt;% 
+  knitr_table()
+</code></pre>
+<table class="table" style="font-size: 15px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Genes </th>
+   <th style="text-align:right;"> logFC </th>
+   <th style="text-align:right;"> PValue </th>
+   <th style="text-align:right;"> FDR </th>
+   <th style="text-align:left;"> Expression </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 276_4 </td>
+   <td style="text-align:right;"> -10.511825 </td>
+   <td style="text-align:right;"> 1.597352e-61 </td>
+   <td style="text-align:right;"> 3.345653e-57 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 62_157 </td>
+   <td style="text-align:right;"> -9.317522 </td>
+   <td style="text-align:right;"> 6.982557e-54 </td>
+   <td style="text-align:right;"> 7.312483e-50 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 144_7 </td>
+   <td style="text-align:right;"> 12.203291 </td>
+   <td style="text-align:right;"> 2.423896e-53 </td>
+   <td style="text-align:right;"> 1.692283e-49 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 198_6 </td>
+   <td style="text-align:right;"> -10.022519 </td>
+   <td style="text-align:right;"> 3.310041e-53 </td>
+   <td style="text-align:right;"> 1.733220e-49 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 829_3 </td>
+   <td style="text-align:right;"> 11.867788 </td>
+   <td style="text-align:right;"> 2.981901e-51 </td>
+   <td style="text-align:right;"> 1.249119e-47 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 44_124 </td>
+   <td style="text-align:right;"> -8.906832 </td>
+   <td style="text-align:right;"> 2.981555e-50 </td>
+   <td style="text-align:right;"> 1.040811e-46 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+  </tr>
+</tbody>
+</table>
+<p>We can now map the column ´Expression' to the color aesthetic of <code>geom_point()</code> and color the points according to their expression classification:</p>
+<pre><code class="language-r">p2 &lt;- ggplot(data, aes(logFC, -log(FDR,10))) +
+  geom_point(aes(color = Expression), size = 2/5) +
+  xlab(expression(&quot;log&quot;[2]*&quot;FC&quot;)) + 
+  ylab(expression(&quot;-log&quot;[10]*&quot;FDR&quot;)) +
+  scale_color_manual(values = c(&quot;dodgerblue3&quot;, &quot;gray50&quot;, &quot;firebrick3&quot;)) +
+  guides(colour = guide_legend(override.aes = list(size=1.5))) 
+p2
+</code></pre>
+<p><img src="/post/2020_volcano/index_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>If we want to know how many genes are up- or down-regulated, or unchanged, we can use dplyr&rsquo;s <code>count()</code> function.</p>
+<pre><code class="language-r">data %&gt;% 
+  count(Expression) %&gt;% 
+  knitr_table()
+</code></pre>
+<table class="table" style="font-size: 15px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> n </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:right;"> 2,559 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Unchanged </td>
+   <td style="text-align:right;"> 16,317 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:right;"> 2,069 </td>
+  </tr>
+</tbody>
+</table>
+<p>Since we already know that the genes towards the right are up-regulated and the genes towards the left are down-regulated, it would be more informative if we colored the points according to their significance level instead. Let&rsquo;s create another column, named &lsquo;Significance&rsquo;, and classify the genes according to significance thresholds (0.05, 0.01, and 0.001):</p>
+<pre><code class="language-r">data &lt;- data %&gt;% 
+  mutate(
+    Significance = case_when(
+      abs(logFC) &gt;= log(2) &amp; FDR &lt;= 0.05 &amp; FDR &gt; 0.01 ~ &quot;FDR 0.05&quot;, 
+      abs(logFC) &gt;= log(2) &amp; FDR &lt;= 0.01 &amp; FDR &gt; 0.001 ~ &quot;FDR 0.01&quot;,
+      abs(logFC) &gt;= log(2) &amp; FDR &lt;= 0.001 ~ &quot;FDR 0.001&quot;, 
+      TRUE ~ &quot;Unchanged&quot;)
+  )
+head(data) %&gt;% 
+  knitr_table()
+</code></pre>
+<table class="table" style="font-size: 15px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Genes </th>
+   <th style="text-align:right;"> logFC </th>
+   <th style="text-align:right;"> PValue </th>
+   <th style="text-align:right;"> FDR </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:left;"> Significance </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 276_4 </td>
+   <td style="text-align:right;"> -10.511825 </td>
+   <td style="text-align:right;"> 1.597352e-61 </td>
+   <td style="text-align:right;"> 3.345653e-57 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 62_157 </td>
+   <td style="text-align:right;"> -9.317522 </td>
+   <td style="text-align:right;"> 6.982557e-54 </td>
+   <td style="text-align:right;"> 7.312483e-50 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 144_7 </td>
+   <td style="text-align:right;"> 12.203291 </td>
+   <td style="text-align:right;"> 2.423896e-53 </td>
+   <td style="text-align:right;"> 1.692283e-49 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 198_6 </td>
+   <td style="text-align:right;"> -10.022519 </td>
+   <td style="text-align:right;"> 3.310041e-53 </td>
+   <td style="text-align:right;"> 1.733220e-49 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 829_3 </td>
+   <td style="text-align:right;"> 11.867788 </td>
+   <td style="text-align:right;"> 2.981901e-51 </td>
+   <td style="text-align:right;"> 1.249119e-47 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 44_124 </td>
+   <td style="text-align:right;"> -8.906832 </td>
+   <td style="text-align:right;"> 2.981555e-50 </td>
+   <td style="text-align:right;"> 1.040811e-46 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+</tbody>
+</table>
+<p>Again, we can use the color aesthetic to map the color of the points to their corresponding significance thresholds:</p>
+<pre><code class="language-r">p3 &lt;- ggplot(data, aes(logFC, -log(FDR,10))) +
+  geom_point(aes(color = Significance), size = 2/5) +
+  xlab(expression(&quot;log&quot;[2]*&quot;FC&quot;)) + 
+  ylab(expression(&quot;-log&quot;[10]*&quot;FDR&quot;)) +
+  scale_color_viridis_d() +
+  guides(colour = guide_legend(override.aes = list(size=1.5))) 
+
+p3
+</code></pre>
+<p><img src="/post/2020_volcano/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>And we can count how many genes are up- or down-regulated according to the different significance thresholds with <code>count()</code>:</p>
+<pre><code class="language-r">data %&gt;% 
+  count(Expression, Significance) %&gt;% 
+  knitr_table()
+</code></pre>
+<table class="table" style="font-size: 15px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:left;"> Significance </th>
+   <th style="text-align:right;"> n </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+   <td style="text-align:right;"> 1,259 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.01 </td>
+   <td style="text-align:right;"> 584 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.05 </td>
+   <td style="text-align:right;"> 716 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Unchanged </td>
+   <td style="text-align:left;"> Unchanged </td>
+   <td style="text-align:right;"> 16,317 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+   <td style="text-align:right;"> 799 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.01 </td>
+   <td style="text-align:right;"> 484 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.05 </td>
+   <td style="text-align:right;"> 786 </td>
+  </tr>
+</tbody>
+</table>
+<h2 id="adding-labels-to-selected-genes">Adding labels to selected genes</h2>
+<p>If we labeled all of the genes, we&rsquo;d end up with a plot with overcrowded labels that wouldn&rsquo;t be possible to read. So, we could opt for labelling only the top n genes or a specific subset of them. For example:</p>
+<pre><code class="language-r">top &lt;- 10
+top_genes &lt;- bind_rows(
+  data %&gt;% 
+    filter(Expression == 'Up-regulated') %&gt;% 
+    arrange(FDR, desc(abs(logFC))) %&gt;% 
+    head(top),
+  data %&gt;% 
+    filter(Expression == 'Down-regulated') %&gt;% 
+    arrange(FDR, desc(abs(logFC))) %&gt;% 
+    head(top)
+)
+top_genes %&gt;% 
+  knitr_table()
+</code></pre>
+<table class="table" style="font-size: 15px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Genes </th>
+   <th style="text-align:right;"> logFC </th>
+   <th style="text-align:right;"> PValue </th>
+   <th style="text-align:right;"> FDR </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:left;"> Significance </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 144_7 </td>
+   <td style="text-align:right;"> 12.203291 </td>
+   <td style="text-align:right;"> 2.423896e-53 </td>
+   <td style="text-align:right;"> 1.692283e-49 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 829_3 </td>
+   <td style="text-align:right;"> 11.867788 </td>
+   <td style="text-align:right;"> 2.981901e-51 </td>
+   <td style="text-align:right;"> 1.249119e-47 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 127_41 </td>
+   <td style="text-align:right;"> 7.949102 </td>
+   <td style="text-align:right;"> 1.453754e-49 </td>
+   <td style="text-align:right;"> 3.383209e-46 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 31_39 </td>
+   <td style="text-align:right;"> 7.716666 </td>
+   <td style="text-align:right;"> 1.415916e-47 </td>
+   <td style="text-align:right;"> 2.965636e-44 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 146_68 </td>
+   <td style="text-align:right;"> 11.025068 </td>
+   <td style="text-align:right;"> 5.433919e-47 </td>
+   <td style="text-align:right;"> 1.034668e-43 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1078_1 </td>
+   <td style="text-align:right;"> 7.749041 </td>
+   <td style="text-align:right;"> 6.828288e-47 </td>
+   <td style="text-align:right;"> 1.100142e-43 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 836_2 </td>
+   <td style="text-align:right;"> 9.113524 </td>
+   <td style="text-align:right;"> 1.191834e-42 </td>
+   <td style="text-align:right;"> 1.783070e-39 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5_110 </td>
+   <td style="text-align:right;"> 12.568871 </td>
+   <td style="text-align:right;"> 2.343958e-42 </td>
+   <td style="text-align:right;"> 2.887894e-39 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1092_3 </td>
+   <td style="text-align:right;"> 11.793138 </td>
+   <td style="text-align:right;"> 2.344945e-41 </td>
+   <td style="text-align:right;"> 2.728604e-38 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 81_91 </td>
+   <td style="text-align:right;"> 6.948956 </td>
+   <td style="text-align:right;"> 3.398732e-41 </td>
+   <td style="text-align:right;"> 3.746655e-38 </td>
+   <td style="text-align:left;"> Up-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 276_4 </td>
+   <td style="text-align:right;"> -10.511825 </td>
+   <td style="text-align:right;"> 1.597352e-61 </td>
+   <td style="text-align:right;"> 3.345653e-57 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 62_157 </td>
+   <td style="text-align:right;"> -9.317522 </td>
+   <td style="text-align:right;"> 6.982557e-54 </td>
+   <td style="text-align:right;"> 7.312483e-50 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 198_6 </td>
+   <td style="text-align:right;"> -10.022519 </td>
+   <td style="text-align:right;"> 3.310041e-53 </td>
+   <td style="text-align:right;"> 1.733220e-49 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 44_124 </td>
+   <td style="text-align:right;"> -8.906832 </td>
+   <td style="text-align:right;"> 2.981555e-50 </td>
+   <td style="text-align:right;"> 1.040811e-46 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 25_31 </td>
+   <td style="text-align:right;"> -8.997426 </td>
+   <td style="text-align:right;"> 6.545320e-50 </td>
+   <td style="text-align:right;"> 1.958453e-46 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 12_195 </td>
+   <td style="text-align:right;"> -8.943343 </td>
+   <td style="text-align:right;"> 7.513410e-50 </td>
+   <td style="text-align:right;"> 1.967105e-46 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 85_19 </td>
+   <td style="text-align:right;"> -7.735937 </td>
+   <td style="text-align:right;"> 6.215242e-47 </td>
+   <td style="text-align:right;"> 1.084819e-43 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 57_45 </td>
+   <td style="text-align:right;"> -6.501718 </td>
+   <td style="text-align:right;"> 1.355336e-42 </td>
+   <td style="text-align:right;"> 1.892500e-39 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 170_33 </td>
+   <td style="text-align:right;"> -6.903067 </td>
+   <td style="text-align:right;"> 1.518887e-42 </td>
+   <td style="text-align:right;"> 1.988317e-39 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 468_3 </td>
+   <td style="text-align:right;"> -9.322243 </td>
+   <td style="text-align:right;"> 1.156078e-40 </td>
+   <td style="text-align:right;"> 1.210703e-37 </td>
+   <td style="text-align:left;"> Down-regulated </td>
+   <td style="text-align:left;"> FDR 0.001 </td>
+  </tr>
+</tbody>
+</table>
+<pre><code class="language-r">p3 &lt;-  p3 +
+  geom_label_repel(data = top_genes,
+                   mapping = aes(logFC, -log(FDR,10), label = Genes),
+                   size = 2)
+p3
+</code></pre>
+<p><img src="/post/2020_volcano/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>So, only the top 10 up- and down-regulated genes are labeled, avoiding overcrowding.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this post we applied two different color schemes on a volcano plot and labeled a few genes using tools from the tidyverse.</p>
+<h2 id="session-info">Session info</h2>
+<pre><code class="language-r">info &lt;- sessionInfo()
+toLatex(info, locale = FALSE)
+</code></pre>
+<pre><code>## \begin{itemize}\raggedright
+##   \item R version 4.0.3 (2020-10-10), \verb|x86_64-pc-linux-gnu|
+##   \item Running under: \verb|Ubuntu 20.04.1 LTS|
+##   \item Matrix products: default
+##   \item BLAS:   \verb|/usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0|
+##   \item LAPACK: \verb|/usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0|
+##   \item Base packages: base, datasets, graphics, grDevices, methods,
+##     stats, utils
+##   \item Other packages: dplyr~1.0.2, forcats~0.5.0, ggplot2~3.3.2,
+##     ggrepel~0.8.2, purrr~0.3.4, readr~1.3.1, stringr~1.4.0,
+##     tibble~3.0.3, tidyr~1.1.2, tidyverse~1.3.0
+##   \item Loaded via a namespace (and not attached): assertthat~0.2.1,
+##     backports~1.1.9, blob~1.2.1, blogdown~0.20, bookdown~0.20,
+##     broom~0.7.0, cellranger~1.1.0, cli~2.0.2, colorspace~1.4-1,
+##     compiler~4.0.3, crayon~1.3.4, curl~4.3, DBI~1.1.0, dbplyr~1.4.4,
+##     digest~0.6.25, ellipsis~0.3.1, evaluate~0.14, fansi~0.4.1,
+##     farver~2.0.3, fs~1.5.0, generics~0.0.2, glue~1.4.2, grid~4.0.3,
+##     gtable~0.3.0, haven~2.3.1, highr~0.8, hms~0.5.3, htmltools~0.5.0,
+##     httr~1.4.2, jsonlite~1.7.1, kableExtra~1.2.1, knitr~1.29,
+##     labeling~0.3, lifecycle~0.2.0, lubridate~1.7.9, magrittr~1.5,
+##     modelr~0.1.8, munsell~0.5.0, pillar~1.4.6, pkgconfig~2.0.3,
+##     R6~2.4.1, Rcpp~1.0.5, readxl~1.3.1, reprex~0.3.0, rlang~0.4.7,
+##     rmarkdown~2.3, rstudioapi~0.11, rvest~0.3.6, scales~1.1.1,
+##     stringi~1.4.6, tidyselect~1.1.0, tools~4.0.3, vctrs~0.3.4,
+##     viridisLite~0.3.0, webshot~0.5.2, withr~2.2.0, xfun~0.16,
+##     xml2~1.3.2, yaml~2.2.1
+## \end{itemize}
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/data-visualization/">Data visualization</a>
+  
+  <a class="badge badge-light" href="/tag/gene-expression/">Gene expression</a>
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/rstats/">Rstats</a>
+  
+  <a class="badge badge-light" href="/tag/tutorial/">Tutorial</a>
+  
+  <a class="badge badge-light" href="/tag/bioinformatics/">Bioinformatics</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/2020_volcano/&amp;text=Visualization%20of%20Volcano%20Plots%20in%20R" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/2020_volcano/&amp;t=Visualization%20of%20Volcano%20Plots%20in%20R" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Visualization%20of%20Volcano%20Plots%20in%20R&amp;body=/post/2020_volcano/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/2020_volcano/&amp;title=Visualization%20of%20Volcano%20Plots%20in%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Visualization%20of%20Volcano%20Plots%20in%20R%20/post/2020_volcano/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/2020_volcano/&amp;title=Visualization%20of%20Volcano%20Plots%20in%20R" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hua16066bf60f843eed0c7de2ab8174328_1498476_270x270_fill_q75_lanczos_center.jpg" alt="Samuel David Gamboa-Tuz"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Samuel David Gamboa-Tuz</a></h5>
+      <h6 class="card-subtitle">Ph.D. in Biological Sciences</h6>
+      <p class="card-text">My research interests include bioinformatics, molecular biology, and evolution.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/samueldgamboa" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=4eQRS_EAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/sdgamboa" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Samuel_Gamboa-Tuz" target="_blank" rel="noopener">
+        <i class="fab fa-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/sdgamboa/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0002-6863-7943" target="_blank" rel="noopener">
+        <i class="ai ai-orcid"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/2020_uber/">Handling Dates and Times in R</a></li>
+      
+      <li><a href="/post/2019_cdsb/">My Experience at the CDSB Workshop 2019</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    © Samuel David Gamboa-Tuz, 2019-2021
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.aeecf26c1eff6b9588dbafc1a9f3953c.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

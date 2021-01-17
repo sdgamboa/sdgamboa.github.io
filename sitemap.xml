@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/talk/example-talk/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/event/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication-type/2/</loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/2020_sonap/</loc>
+    <lastmod>2020-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/2020_fib/</loc>
+    <lastmod>2020-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2020-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/bioinformatics/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/data-visualization/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/gene-expression/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/r/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/rstats/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/tutorial/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020_volcano/</loc>
+    <lastmod>2020-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/dates/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020_uber/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/lubridate/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/times/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/uber/</loc>
+    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/cdsb/</loc>
+    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/course/</loc>
+    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/experience/</loc>
+    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2019_cdsb/</loc>
+    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/workshop/</loc>
+    <lastmod>2019-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/slides/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/slides/example/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2018-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2018-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2018-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2018-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/2018_papaya_transcriptome/</loc>
+    <lastmod>2018-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/terms/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/2018_tmbim/</loc>
+    <lastmod>2018-04-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication-type/6/</loc>
+    <lastmod>2017-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2017-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc></loc>
+    <lastmod>2017-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/2017_intech_chapter/</loc>
+    <lastmod>2017-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/abiotic_stress/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/cicy/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/genomics/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/cicy_papaya/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/plant_sci/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/cicy_sugarcane/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/synnet/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/cicy_gene_evolution/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+  </url>
+  
+</urlset>
