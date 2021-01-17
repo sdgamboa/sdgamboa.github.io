@@ -1086,7 +1086,7 @@ Three
       <link>/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
       <guid>/privacy/</guid>
-      <description>&lt;p&gt;Add your privacy policy here and set &lt;code&gt;draft: false&lt;/code&gt; to publish it. Otherwise, delete this file if you don&amp;rsquo;t need it.&lt;/p&gt;
+      <description>&lt;p&gt;I don&amp;rsquo;t collect any data through this site.&lt;/p&gt;
 </description>
     </item>
     
@@ -1095,7 +1095,7 @@ Three
       <link>/terms/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
       <guid>/terms/</guid>
-      <description>&lt;p&gt;Add your terms here and set &lt;code&gt;draft: false&lt;/code&gt; to publish it. Otherwise, delete this file if you don&amp;rsquo;t need it.&lt;/p&gt;
+      <description>&lt;p&gt;I have no terms to disclose.&lt;/p&gt;
 </description>
     </item>
     
