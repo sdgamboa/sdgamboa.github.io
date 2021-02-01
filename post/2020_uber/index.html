@@ -776,7 +776,7 @@
 <div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 1200px; max-height: 800px;">
   <div style="position: relative">
     <img src="/post/2020_uber/featured_hu3d03a01dcc18bc5be0e67db3d8d209a6_6313038_1200x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
-    <span class="article-header-caption">Uber.</span>
+    <span class="article-header-caption">Image credit: <a href="https://pixabay.com/photos/app-apple-hand-holding-ios-iphone-2941689/"><strong>Pixabay</strong></a></span>
   </div>
 </div>
 
@@ -984,7 +984,7 @@ str(uber_data)
   theme_classic()
 p1
 </code></pre>
-<p><img src="/post/2020_uber/index_files/figure-html/Histogram-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/Histogram-1.png" width="672" /></p>
 <p>It seems that most of the times I waited between 2 and 6 minutes. Once, I waited 15 minutes!</p>
 <p>I&rsquo;ll use tidyeval to create a function that allows me to create a scatter plot between the different variables of the dataset.</p>
 <pre><code class="language-r">get_label &lt;- function(x) {
@@ -1014,7 +1014,7 @@ p5 &lt;- make_scatter_plot(duration, rate)
 
 ggpubr::ggarrange(p2, p3, p4, p5)
 </code></pre>
-<p><img src="/post/2020_uber/index_files/figure-html/Scatter Plot-1.png" width="768" /></p>
+<p><img src="index_files/figure-html/Scatter Plot-1.png" width="768" /></p>
 <p>Not suprisingly, longer trips were more expensive.</p>
 <h2 id="extracting-time-components-from-date-time-vectors">Extracting time components from date-time vectors</h2>
 <p>Individual datetime components can be extracted with lubridate. For example, here is a bar plot depicting the number of Uber rides I took per month (<code>lubridate::month()</code>) and year (<code>lubridate::year()</code>):</p>
@@ -1036,7 +1036,7 @@ p6 &lt;- uber_data %&gt;%
   theme(panel.grid.major.x =  element_blank())
 p6
 </code></pre>
-<p><img src="/post/2020_uber/index_files/figure-html/Bar Plot-1.png" width="720" /></p>
+<p><img src="index_files/figure-html/Bar Plot-1.png" width="720" /></p>
 <p>And, here is a heatmap about the number of trips I took per day of the week (<code>lubridate::wday()</code>) and hour (<code>lubridate::hour</code>):</p>
 <pre><code class="language-r">p7 &lt;- uber_data %&gt;% 
   count(day = wday(request_time, label = TRUE),
@@ -1050,7 +1050,7 @@ p6
   theme_classic()
 p7
 </code></pre>
-<p><img src="/post/2020_uber/index_files/figure-html/Heatmap-1.png" width="480" /></p>
+<p><img src="index_files/figure-html/Heatmap-1.png" width="480" /></p>
 <p>I made a lot of Uber requests between the 17:00 and 18:00 hours on Fridays. I used to have appointments with my nutritionist at 18:00 on Fridays, I suppose that’s what’s reflected on the heatmap plot.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>In this post I used my Uber rides data to practice how to:</p>
@@ -1109,13 +1109,7 @@ toLatex(info, locale = FALSE)
   
   <a class="badge badge-light" href="/tag/r/">R</a>
   
-  <a class="badge badge-light" href="/tag/lubridate/">lubridate</a>
-  
-  <a class="badge badge-light" href="/tag/uber/">uber</a>
-  
-  <a class="badge badge-light" href="/tag/dates/">dates</a>
-  
-  <a class="badge badge-light" href="/tag/times/">times</a>
+  <a class="badge badge-light" href="/tag/lubridate/">Lubridate</a>
   
   <a class="badge badge-light" href="/tag/rstats/">Rstats</a>
   

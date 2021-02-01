@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abiotic Stress | Samuel David Gamboa-Tuz, Ph.D.</title>
+    <link>/tag/abiotic-stress/</link>
+      <atom:link href="/tag/abiotic-stress/index.xml" rel="self" type="application/rss+xml" />
+    <description>Abiotic Stress</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2021</copyright><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Abiotic Stress</title>
+      <link>/tag/abiotic-stress/</link>
+    </image>
+    
+    <item>
+      <title>Papaya tree || Abiotic stress responses</title>
+      <link>/project/cicy_papaya/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project/cicy_papaya/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sugarcane || Abiotic stress responses</title>
+      <link>/project/cicy_sugarcane/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project/cicy_sugarcane/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

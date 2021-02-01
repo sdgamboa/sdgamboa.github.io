@@ -17,9 +17,8 @@
       <link>/post/2020_volcano/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       <guid>/post/2020_volcano/</guid>
-      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;A &lt;strong&gt;volcano plot&lt;/strong&gt; is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&amp;rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the &lt;strong&gt;fold change&lt;/strong&gt; (either positive or negative) in the x axis and a &lt;strong&gt;significance value&lt;/strong&gt; (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.&lt;/p&gt;
-&lt;p&gt;In this post I&amp;rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in &lt;strong&gt;R&lt;/strong&gt; using tools from the &lt;strong&gt;tidyverse&lt;/strong&gt;, such as &lt;strong&gt;dplyr&lt;/strong&gt;, &lt;strong&gt;tidyr&lt;/strong&gt;, and &lt;strong&gt;ggplot2&lt;/strong&gt;. I assume the reader already knows the basics of R and has some familiarity with the tidyverse package.&lt;/p&gt;
+      <description>&lt;p&gt;A &lt;strong&gt;volcano plot&lt;/strong&gt; is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&amp;rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the &lt;strong&gt;fold change&lt;/strong&gt; (either positive or negative) in the x axis and a &lt;strong&gt;significance value&lt;/strong&gt; (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.&lt;/p&gt;
+&lt;p&gt;In this post I&amp;rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in &lt;strong&gt;R&lt;/strong&gt; using tools from the &lt;strong&gt;tidyverse&lt;/strong&gt;, such as &lt;strong&gt;dplyr&lt;/strong&gt;, &lt;strong&gt;tidyr&lt;/strong&gt;, and &lt;strong&gt;ggplot2&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;r-packages-and-data&#34;&gt;R packages and data&lt;/h2&gt;
 &lt;p&gt;In addition to the tidyverse package, I&amp;rsquo;ll load the &lt;strong&gt;ggrepel&lt;/strong&gt; package to aid in the labeling of the genes. The example data comes from a &lt;a href=&#34;https://doi.org/10.1038/s41598-018-32904-2&#34;&gt;research article&lt;/a&gt; and can be downloaded &lt;a href=&#34;https://raw.githubusercontent.com/sdgamboa/misc_datasets/master/L0_vs_L20.tsv&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s load the packages and import the data:&lt;/p&gt;
@@ -785,7 +784,7 @@ str(uber_data)
   theme_classic()
 p1
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Histogram-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Histogram-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It seems that most of the times I waited between 2 and 6 minutes. Once, I waited 15 minutes!&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ll use tidyeval to create a function that allows me to create a scatter plot between the different variables of the dataset.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;get_label &amp;lt;- function(x) {
@@ -815,7 +814,7 @@ p5 &amp;lt;- make_scatter_plot(duration, rate)
 
 ggpubr::ggarrange(p2, p3, p4, p5)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Scatter Plot-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Scatter Plot-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Not suprisingly, longer trips were more expensive.&lt;/p&gt;
 &lt;h2 id=&#34;extracting-time-components-from-date-time-vectors&#34;&gt;Extracting time components from date-time vectors&lt;/h2&gt;
 &lt;p&gt;Individual datetime components can be extracted with lubridate. For example, here is a bar plot depicting the number of Uber rides I took per month (&lt;code&gt;lubridate::month()&lt;/code&gt;) and year (&lt;code&gt;lubridate::year()&lt;/code&gt;):&lt;/p&gt;
@@ -837,7 +836,7 @@ p6 &amp;lt;- uber_data %&amp;gt;%
   theme(panel.grid.major.x =  element_blank())
 p6
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Bar Plot-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Bar Plot-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And, here is a heatmap about the number of trips I took per day of the week (&lt;code&gt;lubridate::wday()&lt;/code&gt;) and hour (&lt;code&gt;lubridate::hour&lt;/code&gt;):&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p7 &amp;lt;- uber_data %&amp;gt;% 
   count(day = wday(request_time, label = TRUE),
@@ -851,7 +850,7 @@ p6
   theme_classic()
 p7
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Heatmap-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Heatmap-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;I made a lot of Uber requests between the 17:00 and 18:00 hours on Fridays. I used to have appointments with my nutritionist at 18:00 on Fridays, I suppose that’s what’s reflected on the heatmap plot.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;In this post I used my Uber rides data to practice how to:&lt;/p&gt;

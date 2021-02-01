@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Samuel David Gamboa-Tuz, Ph.D.</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2021</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2021</copyright><lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Samuel David Gamboa-Tuz, Ph.D.</title>
@@ -13,22 +13,30 @@
     </image>
     
     <item>
-      <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
-      <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
-      <guid>/talk/example-talk/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
+      <title>Paleogenomics, a Glimpse to the DNA of the Past</title>
+      <link>/post/2020_paleogenomics/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>/post/2020_paleogenomics/</guid>
+      <description>&lt;p&gt;Do you remember that famous dinosaur movie released in 1993, in which some scientists brought the enormous reptiles back to life to create a theme park on a remote island? In the movie, the scientists obtained dinosaur DNA from blood samples preserved in mosquitoes fossilized in amber. Since the samples were very ancient, the dinosaur DNA was degraded and incomplete, so they used amphibian DNA to fill the gaps and bring back the prehistoric reptiles. Such as in the movie, real-life scientists are also interested in the recovery and study of ancient DNA samples from extinct organisms. Not to bring them back to life, but to answer relevant scientific questions. This can be achieved by sequencing and analyzing a &lt;strong&gt;paleogenome&lt;/strong&gt;, the genome of an extinct organism; for example, the genome of a mammoth, the neanderthals, or an extinct plant. In the present article, we’ll explore what it is about and a few applications of the scientific field that aims to reconstruct and study ancient DNA: &lt;strong&gt;paleogenomics&lt;/strong&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A paleogenome is the genome of an extinct organism; for example, the genome of a mammoth, the neanderthals, or an extinct plant.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;DNA is the molecule that contains the information necessary for the development and functioning of all organisms. DNA is composed of four basic units, known as bases, which are often represented with the letters “A” (adenine), “T” (thymine)”, “G” (guanine), and “C” (cytosine). These four bases occur one after another in a determined order or &lt;strong&gt;sequence&lt;/strong&gt;. The main difference between my DNA, your DNA, bacterial DNA, and dinosaur DNA lies in their sequence and number of bases. A DNA sequence can be obtained by means of a specialized instrument known as a &lt;strong&gt;DNA sequencer&lt;/strong&gt;. The result of a sequencing experiment can be stored in several text pages (such as this) full of letters; for example, “ATGACGTACAGTAC.” Knowing the complete sequence of a &lt;strong&gt;genome&lt;/strong&gt; - all of the DNA of an organism - can help us to know what species or individual it belongs to, how it works, whether it is more susceptible to certain diseases (such as cancer), among other things.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Paleogenomics is the scientific field that aims to reconstruct and study ancient DNA.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It’s relatively easy to obtain DNA to reconstruct the genome of a living organism. For example, DNA can be obtained from blood or saliva to sequence your genome. But how to obtain DNA from an extinct organism? Similarly to what the scientists did in the movie that I mentioned above: it can be obtained from the remains of organisms preserved in the environment. As in the movie, ancient DNA is degraded and incomplete. In fact, DNA can only be preserved in the environment under particular conditions, such as frozen places or caves, and it only lasts for a few thousand years. The oldest paleogenome that has been sequenced so far is about 700,000 years old and was obtained from horse bones frozen in permafrost. Unlike what is described in the movie, a paleogenome cannot be filled with amphibian DNA, but a reference genome is required as a model to reconstruct it. This reference genome must belong to an evolutionarily closely related organism. For example, the human genome could be used as a reference to reconstruct the paleogenome of the neanderthals.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Knowing the complete sequence of a genome can help us to know what species or individual it belongs to, how it works, whether it is more susceptible to certain diseases, among other things.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Although incomplete, the study of paleogenomes gives us a glimpse of the ancient past to explain some of the present-day biological phenomena. For example, study of the paleogenome of cave bear (&lt;em&gt;Ursus spelaeus&lt;/em&gt; Rosenmuller; an extinct bear species that lived in Europe) and its comparison with modern bears has helped to explain some of the biological factors that might have brought cave bears to extinction, and it could help to design strategies for the conservation of modern bears.  Study of the maize paleogenome can give information, which cannot be obtained from modern maize genomes, about the genetic basis of its domestication process, and thus keep improving this crop. There are other applications of paleogenomics in the fields of medicine, anthropology, etc.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Although incomplete, the study of paleogenomes gives us a glimpse of the ancient past to explain some of the present-day biological phenomena.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In summary, paleogenomics is the scientific field that aims to reconstruct and study DNA of extinct organisms by means of advanced sequencing technologies and comparison with DNA of modern organisms, and it gives us information about ancient genetic elements that could help to explain present-day biological processes.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Wowchemy&amp;rsquo;s &lt;a href=&#34;https://wowchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;This post is a translated version of the original article published in Spanish at &lt;a href=&#34;&#34;&gt;Cakotanú Science&lt;/a&gt; magazine (Volume 1, Issue 2).&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Further event details, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;page elements&lt;/a&gt; such as image galleries, can be added to the body of this page.&lt;/p&gt;
 </description>
     </item>
     
@@ -53,9 +61,8 @@
       <link>/post/2020_volcano/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
       <guid>/post/2020_volcano/</guid>
-      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;A &lt;strong&gt;volcano plot&lt;/strong&gt; is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&amp;rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the &lt;strong&gt;fold change&lt;/strong&gt; (either positive or negative) in the x axis and a &lt;strong&gt;significance value&lt;/strong&gt; (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.&lt;/p&gt;
-&lt;p&gt;In this post I&amp;rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in &lt;strong&gt;R&lt;/strong&gt; using tools from the &lt;strong&gt;tidyverse&lt;/strong&gt;, such as &lt;strong&gt;dplyr&lt;/strong&gt;, &lt;strong&gt;tidyr&lt;/strong&gt;, and &lt;strong&gt;ggplot2&lt;/strong&gt;. I assume the reader already knows the basics of R and has some familiarity with the tidyverse package.&lt;/p&gt;
+      <description>&lt;p&gt;A &lt;strong&gt;volcano plot&lt;/strong&gt; is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&amp;rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the &lt;strong&gt;fold change&lt;/strong&gt; (either positive or negative) in the x axis and a &lt;strong&gt;significance value&lt;/strong&gt; (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.&lt;/p&gt;
+&lt;p&gt;In this post I&amp;rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in &lt;strong&gt;R&lt;/strong&gt; using tools from the &lt;strong&gt;tidyverse&lt;/strong&gt;, such as &lt;strong&gt;dplyr&lt;/strong&gt;, &lt;strong&gt;tidyr&lt;/strong&gt;, and &lt;strong&gt;ggplot2&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;r-packages-and-data&#34;&gt;R packages and data&lt;/h2&gt;
 &lt;p&gt;In addition to the tidyverse package, I&amp;rsquo;ll load the &lt;strong&gt;ggrepel&lt;/strong&gt; package to aid in the labeling of the genes. The example data comes from a &lt;a href=&#34;https://doi.org/10.1038/s41598-018-32904-2&#34;&gt;research article&lt;/a&gt; and can be downloaded &lt;a href=&#34;https://raw.githubusercontent.com/sdgamboa/misc_datasets/master/L0_vs_L20.tsv&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s load the packages and import the data:&lt;/p&gt;
@@ -821,7 +828,7 @@ str(uber_data)
   theme_classic()
 p1
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Histogram-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Histogram-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It seems that most of the times I waited between 2 and 6 minutes. Once, I waited 15 minutes!&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ll use tidyeval to create a function that allows me to create a scatter plot between the different variables of the dataset.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;get_label &amp;lt;- function(x) {
@@ -851,7 +858,7 @@ p5 &amp;lt;- make_scatter_plot(duration, rate)
 
 ggpubr::ggarrange(p2, p3, p4, p5)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Scatter Plot-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Scatter Plot-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Not suprisingly, longer trips were more expensive.&lt;/p&gt;
 &lt;h2 id=&#34;extracting-time-components-from-date-time-vectors&#34;&gt;Extracting time components from date-time vectors&lt;/h2&gt;
 &lt;p&gt;Individual datetime components can be extracted with lubridate. For example, here is a bar plot depicting the number of Uber rides I took per month (&lt;code&gt;lubridate::month()&lt;/code&gt;) and year (&lt;code&gt;lubridate::year()&lt;/code&gt;):&lt;/p&gt;
@@ -873,7 +880,7 @@ p6 &amp;lt;- uber_data %&amp;gt;%
   theme(panel.grid.major.x =  element_blank())
 p6
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Bar Plot-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Bar Plot-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And, here is a heatmap about the number of trips I took per day of the week (&lt;code&gt;lubridate::wday()&lt;/code&gt;) and hour (&lt;code&gt;lubridate::hour&lt;/code&gt;):&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p7 &amp;lt;- uber_data %&amp;gt;% 
   count(day = wday(request_time, label = TRUE),
@@ -887,7 +894,7 @@ p6
   theme_classic()
 p7
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Heatmap-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Heatmap-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;I made a lot of Uber requests between the 17:00 and 18:00 hours on Fridays. I used to have appointments with my nutritionist at 18:00 on Fridays, I suppose that’s what’s reflected on the heatmap plot.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;In this post I used my Uber rides data to practice how to:&lt;/p&gt;
@@ -945,136 +952,10 @@ toLatex(info, locale = FALSE)
     </item>
     
     <item>
-      <title>Slides</title>
-      <link>/slides/example/</link>
-      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>/slides/example/</guid>
-      <description>&lt;h1 id=&#34;create-slides-in-markdown-with-wowchemy&#34;&gt;Create slides in Markdown with Wowchemy&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wowchemy&lt;/a&gt; | &lt;a href=&#34;https://owchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
-&lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
-&lt;li&gt;Supports speaker notes&lt;/li&gt;
-&lt;li&gt;Mobile friendly slides&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Start: &lt;code&gt;Home&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Finish: &lt;code&gt;End&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Overview: &lt;code&gt;Esc&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
-&lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Code block:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
-if porridge == &amp;quot;blueberry&amp;quot;:
-    print(&amp;quot;Eating...&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
-&lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
-&lt;p&gt;Block math:&lt;/p&gt;
-&lt;p&gt;$$
-f\left( x \right) = ;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
-$$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
-&lt;p&gt;Make content appear incrementally&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
-{{% fragment %}} **Two** {{% /fragment %}}
-{{% fragment %}} Three {{% /fragment %}}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
-One
-&lt;/span&gt;
-&lt;span class=&#34;fragment &#34; &gt;
-&lt;strong&gt;Two&lt;/strong&gt;
-&lt;/span&gt;
-&lt;span class=&#34;fragment &#34; &gt;
-Three
-&lt;/span&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
-&lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
-- Only the speaker can read these notes
-- Press `S` key to view
-{{% /speaker_note %}}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
-&lt;aside class=&#34;notes&#34;&gt;
-  &lt;ul&gt;
-&lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
-&lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;/aside&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
-&lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
-&lt;li&gt;league: Gray background, white text, blue links&lt;/li&gt;
-&lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
-&lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
-&lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
-&lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
-&lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-
-&lt;section data-noprocess data-shortcode-slide
-  
-      
-      data-background-image=&#34;/media/boards.jpg&#34;
-  &gt;
-
-&lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
-&lt;p&gt;Customize the slide style and background&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/media/boards.jpg&amp;quot; &amp;gt;}}
-{{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
-{{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
-&lt;p&gt;Let&amp;rsquo;s make headers navy colored.&lt;/p&gt;
-&lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
-.reveal section h2,
-.reveal section h3 {
-  color: navy;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-modules/discussions&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Transcriptomics and co-expression networks reveal tissue-specific responses and regulatory hubs under mild and severe drought in  papaya (Carica papaya L.)</title>
+      <title>Transcriptomics and co-expression networks reveal tissue-specific
+responses and regulatory hubs under mild and severe drought in 
+papaya (Carica papaya L.)
+</title>
       <link>/publication/2018_papaya_transcriptome/</link>
       <pubDate>Wed, 28 Nov 2018 00:00:00 +0000</pubDate>
       <guid>/publication/2018_papaya_transcriptome/</guid>
@@ -1090,7 +971,7 @@ Three
     </item>
     
     <item>
-      <title>Transcriptome, Genetic Transformation and Micropropagation: Some Biotechnology Strategies to Diminish Water Stress Caused by Climate Change in Sugarcane</title>
+      <title>Transcriptome, genetic transformation and micropropagation: Some biotechnology strategies to diminish water stress caused by climate change in sugarcane</title>
       <link>/publication/2017_intech_chapter/</link>
       <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
       <guid>/publication/2017_intech_chapter/</guid>
@@ -1106,7 +987,7 @@ Three
     </item>
     
     <item>
-      <title>Sugarcane || Abiotic Stress Responses</title>
+      <title>Sugarcane || Abiotic stress responses</title>
       <link>/project/cicy_sugarcane/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       <guid>/project/cicy_sugarcane/</guid>

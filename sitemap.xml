@@ -3,23 +3,58 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/talk/example-talk/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <loc></loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/event/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <loc>/tag/ancient-dna/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <loc>/tag/evolution/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/genomics/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/paleogenomics/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020_paleogenomics/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc></loc>
-    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/scicomm/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -68,11 +103,6 @@
   </url>
   
   <url>
-    <loc></loc>
-    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/publication/2020_sonap/</loc>
     <lastmod>2020-10-23T00:00:00+00:00</lastmod>
   </url>
@@ -118,22 +148,12 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tag/r/</loc>
     <lastmod>2020-11-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tag/rstats/</loc>
-    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-11-26T00:00:00+00:00</lastmod>
   </url>
   
@@ -148,27 +168,12 @@
   </url>
   
   <url>
-    <loc>/tag/dates/</loc>
-    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/post/2020_uber/</loc>
     <lastmod>2020-11-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tag/lubridate/</loc>
-    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/times/</loc>
-    <lastmod>2020-11-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/uber/</loc>
     <lastmod>2020-11-26T00:00:00+00:00</lastmod>
   </url>
   
@@ -195,16 +200,6 @@
   <url>
     <loc>/tag/workshop/</loc>
     <lastmod>2019-08-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/slides/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/slides/example/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -258,7 +253,7 @@
   </url>
   
   <url>
-    <loc>/tag/abiotic_stress/</loc>
+    <loc>/tag/abiotic-stress/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -268,17 +263,12 @@
   </url>
   
   <url>
-    <loc>/tag/genomics/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/project/cicy_papaya/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tag/plant_sci/</loc>
+    <loc>/tag/plant-science/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url>
   

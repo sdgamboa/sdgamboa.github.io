@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>lubridate | Samuel David Gamboa-Tuz, Ph.D.</title>
+    <title>Lubridate | Samuel David Gamboa-Tuz, Ph.D.</title>
     <link>/tag/lubridate/</link>
       <atom:link href="/tag/lubridate/index.xml" rel="self" type="application/rss+xml" />
-    <description>lubridate</description>
+    <description>Lubridate</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2021</copyright><lastBuildDate>Wed, 18 Dec 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
-      <title>lubridate</title>
+      <title>Lubridate</title>
       <link>/tag/lubridate/</link>
     </image>
     
@@ -216,7 +216,7 @@ str(uber_data)
   theme_classic()
 p1
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Histogram-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Histogram-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It seems that most of the times I waited between 2 and 6 minutes. Once, I waited 15 minutes!&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ll use tidyeval to create a function that allows me to create a scatter plot between the different variables of the dataset.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;get_label &amp;lt;- function(x) {
@@ -246,7 +246,7 @@ p5 &amp;lt;- make_scatter_plot(duration, rate)
 
 ggpubr::ggarrange(p2, p3, p4, p5)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Scatter Plot-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Scatter Plot-1.png&#34; width=&#34;768&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Not suprisingly, longer trips were more expensive.&lt;/p&gt;
 &lt;h2 id=&#34;extracting-time-components-from-date-time-vectors&#34;&gt;Extracting time components from date-time vectors&lt;/h2&gt;
 &lt;p&gt;Individual datetime components can be extracted with lubridate. For example, here is a bar plot depicting the number of Uber rides I took per month (&lt;code&gt;lubridate::month()&lt;/code&gt;) and year (&lt;code&gt;lubridate::year()&lt;/code&gt;):&lt;/p&gt;
@@ -268,7 +268,7 @@ p6 &amp;lt;- uber_data %&amp;gt;%
   theme(panel.grid.major.x =  element_blank())
 p6
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Bar Plot-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Bar Plot-1.png&#34; width=&#34;720&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And, here is a heatmap about the number of trips I took per day of the week (&lt;code&gt;lubridate::wday()&lt;/code&gt;) and hour (&lt;code&gt;lubridate::hour&lt;/code&gt;):&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p7 &amp;lt;- uber_data %&amp;gt;% 
   count(day = wday(request_time, label = TRUE),
@@ -282,7 +282,7 @@ p6
   theme_classic()
 p7
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020_uber/index_files/figure-html/Heatmap-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;index_files/figure-html/Heatmap-1.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;I made a lot of Uber requests between the 17:00 and 18:00 hours on Fridays. I used to have appointments with my nutritionist at 18:00 on Fridays, I suppose that’s what’s reflected on the heatmap plot.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;In this post I used my Uber rides data to practice how to:&lt;/p&gt;
