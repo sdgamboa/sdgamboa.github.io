@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R | Samuel David Gamboa-Tuz, Ph.D.</title>
+    <link>https://sdgamboa.github.io/tag/r/</link>
+      <atom:link href="https://sdgamboa.github.io/tag/r/index.xml" rel="self" type="application/rss+xml" />
+    <description>R</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2022</copyright><lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://sdgamboa.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>R</title>
+      <link>https://sdgamboa.github.io/tag/r/</link>
+    </image>
+    
+    <item>
+      <title>Visualization of Volcano Plots in R</title>
+      <link>https://sdgamboa.github.io/post/2020_volcano/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://sdgamboa.github.io/post/2020_volcano/</guid>
+      <description>&lt;p&gt;A &lt;strong&gt;volcano plot&lt;/strong&gt; is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&amp;rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the &lt;strong&gt;fold change&lt;/strong&gt; (either positive or negative) in the x axis and a &lt;strong&gt;significance value&lt;/strong&gt; (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.&lt;/p&gt;
+&lt;p&gt;In this post I&amp;rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in &lt;strong&gt;R&lt;/strong&gt; using tools from the &lt;strong&gt;tidyverse&lt;/strong&gt;, such as &lt;strong&gt;dplyr&lt;/strong&gt;, &lt;strong&gt;tidyr&lt;/strong&gt;, and &lt;strong&gt;ggplot2&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;r-packages-and-data&#34;&gt;R packages and data&lt;/h2&gt;
+&lt;p&gt;In addition to the tidyverse package, I&amp;rsquo;ll load the &lt;strong&gt;ggrepel&lt;/strong&gt; package to aid in the labeling of the genes. The example data comes from a &lt;a href=&#34;https://doi.org/10.1038/s41598-018-32904-2&#34;&gt;research article&lt;/a&gt; and can be downloaded &lt;a href=&#34;https://raw.githubusercontent.com/sdgamboa/misc_datasets/master/L0_vs_L20.tsv&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s load the packages and import the data:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# The packages can be installed within R with:
+# intstall.packages(c(&amp;quot;tidyverse&amp;quot;, &amp;quot;ggrepel&amp;quot;))
+
+# Load packages
+library(tidyverse)
+library(ggrepel)
+
+# A short function for outputting the tables
+knitr_table &amp;lt;- function(x) {
+  x %&amp;gt;% 
+    knitr::kable(format = &amp;quot;html&amp;quot;, digits = Inf, 
+                 format.args = list(big.mark = &amp;quot;,&amp;quot;)) %&amp;gt;%
+    kableExtra::kable_styling(font_size = 15)
+}
+
+
+# Import data
+data &amp;lt;- read_tsv(&amp;quot;https://raw.githubusercontent.com/sdgamboa/misc_datasets/master/L0_vs_L20.tsv&amp;quot;)
+dim(data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 20945     4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;head(data) %&amp;gt;% 
+ knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Genes &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; logFC &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; PValue &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; FDR &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 276_4 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.511825 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.597352e-61 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.345653e-57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 62_157 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.317522 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.982557e-54 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.312483e-50 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 144_7 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.203291 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.423896e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.692283e-49 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 198_6 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.022519 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.310041e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.733220e-49 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 829_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.867788 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981901e-51 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.249119e-47 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 44_124 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.906832 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981555e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.040811e-46 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The data contains four columns and 20,945 rows. Each row represents a gene. The column &amp;lsquo;Genes&amp;rsquo; contains the sequence names of each gene. The &amp;rsquo;logFC&amp;rsquo; column contains the logarithm base 2 (log2) of the fold change of each gene; up-regulated genes are positive, down-regulated genes are negative. The &amp;lsquo;PValue&amp;rsquo; and &amp;lsquo;FDR&amp;rsquo; columns contain the significance values; these must be converted to the negative of their logarithm base 10 before plotting, i.e -log10(p-value) or -log10(FDR). I&amp;rsquo;ll use the -log10(FDR) in this post.&lt;/p&gt;
+&lt;h2 id=&#34;a-simple-volcano-plot&#34;&gt;A simple volcano plot&lt;/h2&gt;
+&lt;p&gt;Since volacno plots are scatter plots, we can use &lt;code&gt;geom_point()&lt;/code&gt; to generate one with ggplot2. The conversion of the FDR values to their -log10 can be done at this step:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p1 &amp;lt;- ggplot(data, aes(logFC, -log(FDR,10))) + # -log10 conversion  
+  geom_point(size = 2/5) +
+  xlab(expression(&amp;quot;log&amp;quot;[2]*&amp;quot;FC&amp;quot;)) + 
+  ylab(expression(&amp;quot;-log&amp;quot;[10]*&amp;quot;FDR&amp;quot;))
+p1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/plot 1-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
+&lt;p&gt;The dispersion of the points (representing genes) in the plot is similar to, you guessed, a volcano (that&amp;rsquo;s why they&amp;rsquo;re called volcano plots). Since the FDR values were transformed to their -log10, the higher the position of a point, the more significant its value is (y axis). Points with positive fold change values (to the right) are up-regulated and points with negative fold change values (to the left) are down-regulated (x axis).&lt;/p&gt;
+&lt;h2 id=&#34;adding-color-to-differentially-expressed-genes-degs&#34;&gt;Adding color to differentially expressed genes (DEGs)&lt;/h2&gt;
+&lt;p&gt;Differentially expressed genes (DEGs) are usally considered as those with an absolute fold change greater or equal to 2 and a FDR value of 0.05 or less. So, we can make our volcano plot a bit more informative if we add some color to the DEGs in the plot. To do so, we&amp;rsquo;ll add an additional column, named &amp;lsquo;Expression&amp;rsquo;, indicating whether the expression of a gene is up-regulated, down-regulated, or unchanged:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data &amp;lt;- data %&amp;gt;% 
+  mutate(
+    Expression = case_when(logFC &amp;gt;= log(2) &amp;amp; FDR &amp;lt;= 0.05 ~ &amp;quot;Up-regulated&amp;quot;,
+                           logFC &amp;lt;= -log(2) &amp;amp; FDR &amp;lt;= 0.05 ~ &amp;quot;Down-regulated&amp;quot;,
+                           TRUE ~ &amp;quot;Unchanged&amp;quot;)
+    )
+head(data) %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Genes &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; logFC &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; PValue &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; FDR &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 276_4 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.511825 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.597352e-61 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.345653e-57 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 62_157 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.317522 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.982557e-54 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.312483e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 144_7 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.203291 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.423896e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.692283e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 198_6 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.022519 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.310041e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.733220e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 829_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.867788 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981901e-51 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.249119e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 44_124 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.906832 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981555e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.040811e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;We can now map the column ´Expression&amp;rsquo; to the color aesthetic of &lt;code&gt;geom_point()&lt;/code&gt; and color the points according to their expression classification:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p2 &amp;lt;- ggplot(data, aes(logFC, -log(FDR,10))) +
+  geom_point(aes(color = Expression), size = 2/5) +
+  xlab(expression(&amp;quot;log&amp;quot;[2]*&amp;quot;FC&amp;quot;)) + 
+  ylab(expression(&amp;quot;-log&amp;quot;[10]*&amp;quot;FDR&amp;quot;)) +
+  scale_color_manual(values = c(&amp;quot;dodgerblue3&amp;quot;, &amp;quot;gray50&amp;quot;, &amp;quot;firebrick3&amp;quot;)) +
+  guides(colour = guide_legend(override.aes = list(size=1.5))) 
+p2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
+&lt;p&gt;If we want to know how many genes are up- or down-regulated, or unchanged, we can use dplyr&amp;rsquo;s &lt;code&gt;count()&lt;/code&gt; function.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;% 
+  count(Expression) %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; n &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2,559 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Unchanged &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 16,317 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2,069 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Since we already know that the genes towards the right are up-regulated and the genes towards the left are down-regulated, it would be more informative if we colored the points according to their significance level instead. Let&amp;rsquo;s create another column, named &amp;lsquo;Significance&amp;rsquo;, and classify the genes according to significance thresholds (0.05, 0.01, and 0.001):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data &amp;lt;- data %&amp;gt;% 
+  mutate(
+    Significance = case_when(
+      abs(logFC) &amp;gt;= log(2) &amp;amp; FDR &amp;lt;= 0.05 &amp;amp; FDR &amp;gt; 0.01 ~ &amp;quot;FDR 0.05&amp;quot;, 
+      abs(logFC) &amp;gt;= log(2) &amp;amp; FDR &amp;lt;= 0.01 &amp;amp; FDR &amp;gt; 0.001 ~ &amp;quot;FDR 0.01&amp;quot;,
+      abs(logFC) &amp;gt;= log(2) &amp;amp; FDR &amp;lt;= 0.001 ~ &amp;quot;FDR 0.001&amp;quot;, 
+      TRUE ~ &amp;quot;Unchanged&amp;quot;)
+  )
+head(data) %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Genes &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; logFC &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; PValue &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; FDR &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Significance &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 276_4 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.511825 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.597352e-61 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.345653e-57 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 62_157 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.317522 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.982557e-54 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.312483e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 144_7 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.203291 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.423896e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.692283e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 198_6 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.022519 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.310041e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.733220e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 829_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.867788 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981901e-51 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.249119e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 44_124 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.906832 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981555e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.040811e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Again, we can use the color aesthetic to map the color of the points to their corresponding significance thresholds:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p3 &amp;lt;- ggplot(data, aes(logFC, -log(FDR,10))) +
+  geom_point(aes(color = Significance), size = 2/5) +
+  xlab(expression(&amp;quot;log&amp;quot;[2]*&amp;quot;FC&amp;quot;)) + 
+  ylab(expression(&amp;quot;-log&amp;quot;[10]*&amp;quot;FDR&amp;quot;)) +
+  scale_color_viridis_d() +
+  guides(colour = guide_legend(override.aes = list(size=1.5))) 
+
+p3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;And we can count how many genes are up- or down-regulated according to the different significance thresholds with &lt;code&gt;count()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;% 
+  count(Expression, Significance) %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Significance &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; n &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1,259 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.01 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 584 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.05 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 716 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Unchanged &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Unchanged &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 16,317 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 799 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.01 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 484 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.05 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 786 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;adding-labels-to-selected-genes&#34;&gt;Adding labels to selected genes&lt;/h2&gt;
+&lt;p&gt;If we labeled all of the genes, we&amp;rsquo;d end up with a plot with overcrowded labels that wouldn&amp;rsquo;t be possible to read. So, we could opt for labelling only the top n genes or a specific subset of them. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;top &amp;lt;- 10
+top_genes &amp;lt;- bind_rows(
+  data %&amp;gt;% 
+    filter(Expression == &#39;Up-regulated&#39;) %&amp;gt;% 
+    arrange(FDR, desc(abs(logFC))) %&amp;gt;% 
+    head(top),
+  data %&amp;gt;% 
+    filter(Expression == &#39;Down-regulated&#39;) %&amp;gt;% 
+    arrange(FDR, desc(abs(logFC))) %&amp;gt;% 
+    head(top)
+)
+top_genes %&amp;gt;% 
+  knitr_table()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 15px; margin-left: auto; margin-right: auto;&#34;&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Genes &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; logFC &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; PValue &lt;/th&gt;
+   &lt;th style=&#34;text-align:right;&#34;&gt; FDR &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Expression &lt;/th&gt;
+   &lt;th style=&#34;text-align:left;&#34;&gt; Significance &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 144_7 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.203291 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.423896e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.692283e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 829_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.867788 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981901e-51 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.249119e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 127_41 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.949102 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.453754e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.383209e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 31_39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.716666 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.415916e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.965636e-44 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 146_68 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.025068 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 5.433919e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.034668e-43 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 1078_1 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.749041 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.828288e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.100142e-43 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 836_2 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 9.113524 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.191834e-42 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.783070e-39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 5_110 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 12.568871 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.343958e-42 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.887894e-39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 1092_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 11.793138 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.344945e-41 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.728604e-38 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 81_91 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.948956 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.398732e-41 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.746655e-38 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Up-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 276_4 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.511825 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.597352e-61 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.345653e-57 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 62_157 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.317522 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.982557e-54 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.312483e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 198_6 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -10.022519 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 3.310041e-53 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.733220e-49 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 44_124 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.906832 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 2.981555e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.040811e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 25_31 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.997426 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.545320e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.958453e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 12_195 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -8.943343 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 7.513410e-50 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.967105e-46 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 85_19 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -7.735937 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 6.215242e-47 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.084819e-43 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 57_45 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -6.501718 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.355336e-42 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.892500e-39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 170_33 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -6.903067 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.518887e-42 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.988317e-39 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; 468_3 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; -9.322243 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.156078e-40 &lt;/td&gt;
+   &lt;td style=&#34;text-align:right;&#34;&gt; 1.210703e-37 &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; Down-regulated &lt;/td&gt;
+   &lt;td style=&#34;text-align:left;&#34;&gt; FDR 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p3 &amp;lt;-  p3 +
+  geom_label_repel(data = top_genes,
+                   mapping = aes(logFC, -log(FDR,10), label = Genes),
+                   size = 2)
+p3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;So, only the top 10 up- and down-regulated genes are labeled, avoiding overcrowding.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In this post we applied two different color schemes on a volcano plot and labeled a few genes using tools from the tidyverse.&lt;/p&gt;
+&lt;h2 id=&#34;session-info&#34;&gt;Session info&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;info &amp;lt;- sessionInfo()
+toLatex(info, locale = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## \begin{itemize}\raggedright
+##   \item R version 4.0.3 (2020-10-10), \verb|x86_64-pc-linux-gnu|
+##   \item Running under: \verb|Ubuntu 20.04.1 LTS|
+##   \item Matrix products: default
+##   \item BLAS:   \verb|/usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0|
+##   \item LAPACK: \verb|/usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0|
+##   \item Base packages: base, datasets, graphics, grDevices, methods,
+##     stats, utils
+##   \item Other packages: dplyr~1.0.2, forcats~0.5.0, ggplot2~3.3.2,
+##     ggrepel~0.8.2, purrr~0.3.4, readr~1.3.1, stringr~1.4.0,
+##     tibble~3.0.3, tidyr~1.1.2, tidyverse~1.3.0
+##   \item Loaded via a namespace (and not attached): assertthat~0.2.1,
+##     backports~1.1.9, blob~1.2.1, blogdown~0.20, bookdown~0.20,
+##     broom~0.7.0, cellranger~1.1.0, cli~2.0.2, colorspace~1.4-1,
+##     compiler~4.0.3, crayon~1.3.4, curl~4.3, DBI~1.1.0, dbplyr~1.4.4,
+##     digest~0.6.25, ellipsis~0.3.1, evaluate~0.14, fansi~0.4.1,
+##     farver~2.0.3, fs~1.5.0, generics~0.0.2, glue~1.4.2, grid~4.0.3,
+##     gtable~0.3.0, haven~2.3.1, highr~0.8, hms~0.5.3, htmltools~0.5.0,
+##     httr~1.4.2, jsonlite~1.7.1, kableExtra~1.2.1, knitr~1.29,
+##     labeling~0.3, lifecycle~0.2.0, lubridate~1.7.9, magrittr~1.5,
+##     modelr~0.1.8, munsell~0.5.0, pillar~1.4.6, pkgconfig~2.0.3,
+##     R6~2.4.1, Rcpp~1.0.5, readxl~1.3.1, reprex~0.3.0, rlang~0.4.7,
+##     rmarkdown~2.3, rstudioapi~0.11, rvest~0.3.6, scales~1.1.1,
+##     stringi~1.4.6, tidyselect~1.1.0, tools~4.0.3, vctrs~0.3.4,
+##     viridisLite~0.3.0, webshot~0.5.2, withr~2.2.0, xfun~0.16,
+##     xml2~1.3.2, yaml~2.2.1
+## \end{itemize}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Handling Dates and Times in R</title>
+      <link>https://sdgamboa.github.io/post/2020_uber/</link>
+      <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://sdgamboa.github.io/post/2020_uber/</guid>
+      <description>&lt;p&gt;The other day I requested my rides data to Uber (&lt;a href=&#34;https://help.uber.com/riders/article/download-your-data?nodeId=2c86900d-8408-4bac-b92a-956d793acd11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;). They replied with a convenient csv file containing detailed information of every ride I took between 2016 and 2019. The dataset included dates and times in UTC format. I used this dataset to try some functions of the lubridate package for handling dates and times in R.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Load packages
+library(tidyverse)
+library(lubridate)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;the-dataset&#34;&gt;The dataset&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s start by importing the dataset. I removed four columns containing my
+address information beforehand. Still, I won&amp;rsquo;t be sharing the full dataset since it contains detailed information about the starting and ending times of each of my rides. However, you can try the code posted here with &lt;a href=&#34;https://help.uber.com/riders/article/download-your-data?nodeId=2c86900d-8408-4bac-b92a-956d793acd11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;you&amp;rsquo;re own Uber data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll import the dataset with the &lt;code&gt;readr::read_csv()&lt;/code&gt; function and check its
+structure.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Open file
+filename &amp;lt;- &amp;quot;./_files/trips_data.csv&amp;quot;
+uber_data &amp;lt;- read_csv(filename)
+
+# See first rows of data
+uber_data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 184 x 9
+##    City  `Product Type` `Trip or Order … `Request Time` `Begin Trip Tim…
+##    &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;           
+##  1 Meri… UberX          COMPLETED        2019-09-15 00… 2019-09-15 00:5…
+##  2 Meri… UberX          COMPLETED        2019-09-14 19… 2019-09-14 19:0…
+##  3 Meri… UberX          COMPLETED        2019-09-14 04… 2019-09-14 04:1…
+##  4 Meri… UberX          COMPLETED        2019-09-07 04… 2019-09-07 04:3…
+##  5 Meri… UberX          COMPLETED        2019-09-02 14… 2019-09-02 14:0…
+##  6 Meri… UberX          COMPLETED        2019-08-30 19… 2019-08-30 19:0…
+##  7 Meri… UberX          COMPLETED        2019-08-06 02… 2019-08-06 02:3…
+##  8 Meri… UberX          COMPLETED        2019-07-21 18… 2019-07-21 18:4…
+##  9 Meri… UberX          COMPLETED        2019-07-07 13… 2019-07-07 14:0…
+## 10 Meri… UberX          COMPLETED        2019-06-29 03… 2019-06-29 03:2…
+## # … with 174 more rows, and 4 more variables: `Dropoff Time` &amp;lt;chr&amp;gt;, `Distance
+## #   (miles)` &amp;lt;dbl&amp;gt;, `Fare Amount` &amp;lt;dbl&amp;gt;, `Fare Currency` &amp;lt;chr&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# See data structure
+map(uber_data, unique) %&amp;gt;% 
+  str()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## List of 9
+##  $ City                : chr [1:2] &amp;quot;Merida&amp;quot; &amp;quot;Mexico City&amp;quot;
+##  $ Product Type        : chr [1:2] &amp;quot;UberX&amp;quot; &amp;quot;uberX&amp;quot;
+##  $ Trip or Order Status: chr [1:3] &amp;quot;COMPLETED&amp;quot; &amp;quot;CANCELED&amp;quot; &amp;quot;DRIVER_CANCELED&amp;quot;
+##  $ Request Time        : chr [1:184] &amp;quot;2019-09-15 00:45:08 +0000 UTC&amp;quot; &amp;quot;2019-09-14 19:02:06 +0000 UTC&amp;quot; &amp;quot;2019-09-14 04:09:58 +0000 UTC&amp;quot; &amp;quot;2019-09-07 04:27:39 +0000 UTC&amp;quot; ...
+##  $ Begin Trip Time     : chr [1:179] &amp;quot;2019-09-15 00:52:08 +0000 UTC&amp;quot; &amp;quot;2019-09-14 19:06:36 +0000 UTC&amp;quot; &amp;quot;2019-09-14 04:15:48 +0000 UTC&amp;quot; &amp;quot;2019-09-07 04:30:06 +0000 UTC&amp;quot; ...
+##  $ Dropoff Time        : chr [1:179] &amp;quot;2019-09-15 01:00:35 +0000 UTC&amp;quot; &amp;quot;2019-09-14 19:10:24 +0000 UTC&amp;quot; &amp;quot;2019-09-14 04:23:46 +0000 UTC&amp;quot; &amp;quot;2019-09-07 04:34:55 +0000 UTC&amp;quot; ...
+##  $ Distance (miles)    : num [1:131] 1.82 0.94 2.49 1.41 1.12 1.4 3.74 3.34 5.95 4 ...
+##  $ Fare Amount         : num [1:148] 63.2 22.8 37.7 26.7 25.4 ...
+##  $ Fare Currency       : chr &amp;quot;MXN&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The dataset has nine columns:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Column name&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;City&lt;/td&gt;
+&lt;td&gt;The city where the ride was requested (Merida or Mexico City).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Product Type&lt;/td&gt;
+&lt;td&gt;Type of servide: Uberx or uberX. They&amp;rsquo;re both the same.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Trip or Order status&lt;/td&gt;
+&lt;td&gt;Whether the trip was canceled, completed, or canceled by driver.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Request Time&lt;/td&gt;
+&lt;td&gt;Date and time when the trip was requested in UTC.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Begin Trip Time&lt;/td&gt;
+&lt;td&gt;Date and time when the trip started in UTC.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dropoff Time&lt;/td&gt;
+&lt;td&gt;Date and time when the trip finished in UTC.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Distance (miles)&lt;/td&gt;
+&lt;td&gt;Total distance of the trip in miles.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Fare Amount&lt;/td&gt;
+&lt;td&gt;How much did the trip cost.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Fare Currency&lt;/td&gt;
+&lt;td&gt;Currency. All in Mexican pesos (MXN).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;I don&amp;rsquo;t need all of this information. I only want to analyze the trips that happened in
+Merida, where I&amp;rsquo;m from and where most of the trips occurred. I don&amp;rsquo;t need the
+Product Type nor the Fare Currency columns since they both contain a single type of value each. So, I&amp;rsquo;ll only keep the distance, fare, and date-time data of the completed rides. Also, I need to change the names of the columns for ones that are easier to write.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;uber_data &amp;lt;- uber_data %&amp;gt;%
+  filter(City == &amp;quot;Merida&amp;quot;, `Trip or Order Status` == &amp;quot;COMPLETED&amp;quot;) %&amp;gt;% 
+  select(request_time = `Request Time`, begin_time = `Begin Trip Time`,
+         dropoff_time = `Dropoff Time`, distance = `Distance (miles)`,
+         fare = `Fare Amount`)
+
+uber_data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 173 x 5
+##    request_time          begin_time          dropoff_time         distance  fare
+##    &amp;lt;chr&amp;gt;                 &amp;lt;chr&amp;gt;               &amp;lt;chr&amp;gt;                   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+##  1 2019-09-15 00:45:08 … 2019-09-15 00:52:0… 2019-09-15 01:00:35…     1.82  63.2
+##  2 2019-09-14 19:02:06 … 2019-09-14 19:06:3… 2019-09-14 19:10:24…     0.94  22.8
+##  3 2019-09-14 04:09:58 … 2019-09-14 04:15:4… 2019-09-14 04:23:46…     2.49  37.7
+##  4 2019-09-07 04:27:39 … 2019-09-07 04:30:0… 2019-09-07 04:34:55…     1.41  26.7
+##  5 2019-09-02 14:04:26 … 2019-09-02 14:06:4… 2019-09-02 14:12:28…     1.12  25.4
+##  6 2019-08-30 19:01:33 … 2019-08-30 19:07:1… 2019-08-30 19:21:54…     1.4   36.3
+##  7 2019-08-06 02:31:16 … 2019-08-06 02:34:4… 2019-08-06 02:48:46…     3.74  52.9
+##  8 2019-07-21 18:36:19 … 2019-07-21 18:40:1… 2019-07-21 18:55:17…     3.34  62.3
+##  9 2019-07-07 13:54:41 … 2019-07-07 14:01:0… 2019-07-07 14:14:24…     5.95  56.1
+## 10 2019-06-29 03:20:57 … 2019-06-29 03:26:4… 2019-06-29 03:44:50…     4     58.1
+## # … with 163 more rows
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The dataset looks better now. However, the request_time, begin_time, and  dropoff_time columns,
+which contain date and time values, are stored as character vectors. It would be better to have
+them in a specialized vector for handling dates and times.&lt;/p&gt;
+&lt;h2 id=&#34;parsing-dates-and-times&#34;&gt;Parsing dates and times&lt;/h2&gt;
+&lt;p&gt;In R, date and time data can be handled as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Date&lt;/strong&gt; vectors, for dates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;POSIXct&lt;/strong&gt; or &lt;strong&gt;POSIXlt&lt;/strong&gt; vectors, for date-time data.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;difftime&lt;/strong&gt; vectors, for duration.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you want to know more about these types of vectors, &lt;a href=&#34;https://www.r-bloggers.com/2020/04/a-comprehensive-introduction-to-handling-date-time-in-r/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this blog post&lt;/a&gt; offers a good introduction to the use of dates and times in R. In this case, a POSIXct vector would be appropiate to store and handle my data.&lt;/p&gt;
+&lt;p&gt;Usually, &lt;code&gt;read_csv()&lt;/code&gt; does a good job in guessing how dates and times are stored when they&amp;rsquo;re in ISO 8601 format,
+but in this case the UTC offset is not recognized (+0000). So, I need to parse it explicity with the
+&lt;code&gt;readr::parse_datetime()&lt;/code&gt; function. Also, I want to convert the time format from UTC to local time for an easier use.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;my_time_zone &amp;lt;- Sys.timezone() # I&#39;m in &amp;quot;America/Merida&amp;quot; time zone at the moment of writing this post. Check OlsonNames() for more time zones.
+
+uber_data &amp;lt;- uber_data %&amp;gt;% 
+  map_if(is.character,
+         ~readr::parse_datetime(.x,
+                         format = &amp;quot;%Y-%m-%d %H:%M:%S %z %Z&amp;quot;,
+                         locale = locale(tz = my_time_zone))) %&amp;gt;%
+  as_tibble()
+uber_data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 173 x 5
+##    request_time        begin_time          dropoff_time        distance  fare
+##    &amp;lt;dttm&amp;gt;              &amp;lt;dttm&amp;gt;              &amp;lt;dttm&amp;gt;                 &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+##  1 2019-09-14 19:45:08 2019-09-14 19:52:08 2019-09-14 20:00:35     1.82  63.2
+##  2 2019-09-14 14:02:06 2019-09-14 14:06:36 2019-09-14 14:10:24     0.94  22.8
+##  3 2019-09-13 23:09:58 2019-09-13 23:15:48 2019-09-13 23:23:46     2.49  37.7
+##  4 2019-09-06 23:27:39 2019-09-06 23:30:06 2019-09-06 23:34:55     1.41  26.7
+##  5 2019-09-02 09:04:26 2019-09-02 09:06:49 2019-09-02 09:12:28     1.12  25.4
+##  6 2019-08-30 14:01:33 2019-08-30 14:07:15 2019-08-30 14:21:54     1.4   36.3
+##  7 2019-08-05 21:31:16 2019-08-05 21:34:49 2019-08-05 21:48:46     3.74  52.9
+##  8 2019-07-21 13:36:19 2019-07-21 13:40:11 2019-07-21 13:55:17     3.34  62.3
+##  9 2019-07-07 08:54:41 2019-07-07 09:01:06 2019-07-07 09:14:24     5.95  56.1
+## 10 2019-06-28 22:20:57 2019-06-28 22:26:41 2019-06-28 22:44:50     4     58.1
+## # … with 163 more rows
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the code above I used &lt;code&gt;purrr::map_if()&lt;/code&gt; to parse the character vectors in the
+dataset to POSIXct vectors. Remember that map functions give a list as output, so I had to convert the output back to a tibble.&lt;/p&gt;
+&lt;p&gt;Within the &lt;code&gt;parse_date()&lt;/code&gt; function I used two arguments:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The format argument with the specifciations for date, time, offset, and UTC.&lt;/li&gt;
+&lt;li&gt;The locale argument with my current time zone (&amp;ldquo;America/Merida&amp;rdquo;).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now, the dates and times in my dataset are in the correct object type (POSIXct vectors) and I can handle them easily with functions of the lubridate package.&lt;/p&gt;
+&lt;h2 id=&#34;getting-duration-of-the-trips&#34;&gt;Getting duration of the trips&lt;/h2&gt;
+&lt;p&gt;Now that the datetime columns have been parsed correctly and are in the local time zone, it’s easy to do calculations with them.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s calculate how much time did I wait for each trip and how long each trip lasted. I can calcuate how much I waited for each trip by estimating the interval between the time of request and the time of start of my trips. An interval between the start of the trip and the time of arrival will tell me how long a trip lasted. I&amp;rsquo;ll use the &amp;ldquo;interlval operator&amp;rdquo; (&lt;code&gt;%--%&lt;/code&gt;) from the lubridate package to get these intervals.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll also convert the distance to km and calculate the overall fare rate of each trip.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;uber_data &amp;lt;- uber_data %&amp;gt;% 
+  mutate(wait = request_time %--% begin_time / dminutes(1),
+         duration = begin_time %--% dropoff_time / dminutes(1),
+         distance = distance * 1.60934,
+         rate = fare / distance)
+str(uber_data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## tibble [173 × 8] (S3: tbl_df/tbl/data.frame)
+##  $ request_time: POSIXct[1:173], format: &amp;quot;2019-09-14 19:45:08&amp;quot; &amp;quot;2019-09-14 14:02:06&amp;quot; ...
+##  $ begin_time  : POSIXct[1:173], format: &amp;quot;2019-09-14 19:52:08&amp;quot; &amp;quot;2019-09-14 14:06:36&amp;quot; ...
+##  $ dropoff_time: POSIXct[1:173], format: &amp;quot;2019-09-14 20:00:35&amp;quot; &amp;quot;2019-09-14 14:10:24&amp;quot; ...
+##  $ distance    : num [1:173] 2.93 1.51 4.01 2.27 1.8 ...
+##  $ fare        : num [1:173] 63.2 22.8 37.7 26.7 25.4 ...
+##  $ wait        : num [1:173] 7 4.5 5.83 2.45 2.38 ...
+##  $ duration    : num [1:173] 8.45 3.8 7.97 4.82 5.65 ...
+##  $ rate        : num [1:173] 21.6 15.1 9.4 11.8 14.1 ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the code above, I divided the intervals by 1 minute to get the output in minutes. The &lt;code&gt;dminutes()&lt;/code&gt; is from the lubridate package as well.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s look at the frequency distribution of my wait times between request and beginning of my trips.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p1 &amp;lt;- uber_data %&amp;gt;% 
+  ggplot(aes(wait)) +
+  geom_histogram(binwidth = 1, fill = &amp;quot;firebrick4&amp;quot;, alpha = 0.7) +
+  labs(x = &amp;quot;Wait time (min)&amp;quot;, y = &amp;quot;Frequency&amp;quot;) +
+  scale_x_continuous(breaks = seq(1,15,1)) +
+  theme_classic()
+p1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;index_files/figure-html/Histogram-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;It seems that most of the times I waited between 2 and 6 minutes. Once, I waited 15 minutes!&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll use tidyeval to create a function that allows me to create a scatter plot between the different variables of the dataset.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;get_label &amp;lt;- function(x) {
+  x_var &amp;lt;- rlang::as_name(enquo(x))
+  return(case_when(x_var == &amp;quot;distance&amp;quot; ~ &amp;quot;Distance (Km)&amp;quot;,
+                   x_var == &amp;quot;duration&amp;quot; ~ &amp;quot;Duration (min)&amp;quot;,
+                   x_var == &amp;quot;fare&amp;quot; ~ &amp;quot;Fare (MXN)&amp;quot;,
+                   x_var == &amp;quot;rate&amp;quot; ~ &amp;quot;Fare Rate (MXN/Km)&amp;quot;,
+                   x_var == &amp;quot;wait&amp;quot; ~ &amp;quot;Wait Time (min)&amp;quot;))
+}
+
+make_scatter_plot &amp;lt;- function(x, y) {
+  x_var &amp;lt;- enquo(x)
+  y_var &amp;lt;- enquo(y)
+  uber_data %&amp;gt;% 
+    ggplot(aes(!!x_var, !!y_var)) +
+    labs(x = get_label(!!x_var), y = get_label(!!y_var)) +
+    geom_smooth() +
+    geom_point(size = 0.75, color = &amp;quot;firebrick4&amp;quot;) +
+    theme_bw()
+}
+
+p2 &amp;lt;- make_scatter_plot(duration, fare)
+p3 &amp;lt;- make_scatter_plot(distance, fare)
+p4 &amp;lt;- make_scatter_plot(distance, duration)
+p5 &amp;lt;- make_scatter_plot(duration, rate)
+
+ggpubr::ggarrange(p2, p3, p4, p5)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;index_files/figure-html/Scatter Plot-1.png&#34; width=&#34;768&#34; /&gt;
+&lt;p&gt;Not suprisingly, longer trips were more expensive.&lt;/p&gt;
+&lt;h2 id=&#34;extracting-time-components-from-date-time-vectors&#34;&gt;Extracting time components from date-time vectors&lt;/h2&gt;
+&lt;p&gt;Individual datetime components can be extracted with lubridate. For example, here is a bar plot depicting the number of Uber rides I took per month (&lt;code&gt;lubridate::month()&lt;/code&gt;) and year (&lt;code&gt;lubridate::year()&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;total_number_of_trips &amp;lt;- length(uber_data$request_time)
+
+p6 &amp;lt;- uber_data %&amp;gt;%
+  group_by(year = year(request_time),
+           month = month(request_time, label = TRUE)
+           ) %&amp;gt;% 
+  summarise(percent = n() / total_number_of_trips) %&amp;gt;% 
+  ungroup() %&amp;gt;% 
+  ggplot(aes(month, percent, fill = factor(year))) +
+  geom_col(aes(group = factor(year))) +
+  facet_wrap(. ~ factor(year), strip.position = &amp;quot;top&amp;quot;) +
+  labs(x = &amp;quot;Month&amp;quot;, y = &amp;quot;Trips (%)&amp;quot;) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_viridis_d(option = &amp;quot;E&amp;quot;) +
+  guides(fill = guide_legend(title = &amp;quot;Year&amp;quot;)) +
+  theme(panel.grid.major.x =  element_blank())
+p6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;index_files/figure-html/Bar Plot-1.png&#34; width=&#34;720&#34; /&gt;
+&lt;p&gt;And, here is a heatmap about the number of trips I took per day of the week (&lt;code&gt;lubridate::wday()&lt;/code&gt;) and hour (&lt;code&gt;lubridate::hour&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;p7 &amp;lt;- uber_data %&amp;gt;% 
+  count(day = wday(request_time, label = TRUE),
+        hour = hour(request_time),
+        name = &amp;quot;Count&amp;quot;) %&amp;gt;% 
+  filter(between(hour, 12, 21)) %&amp;gt;%
+  ggplot() +
+  geom_tile(aes(x = day, y = factor(hour), fill = Count)) +
+  labs(x = &amp;quot;Day&amp;quot;, y = &amp;quot;Hour (24 h)&amp;quot;) +
+  guides(fill = guide_colorbar(title = &amp;quot;Count&amp;quot;)) +
+  theme_classic()
+p7
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;index_files/figure-html/Heatmap-1.png&#34; width=&#34;480&#34; /&gt;
+&lt;p&gt;I made a lot of Uber requests between the 17:00 and 18:00 hours on Fridays. I used to have appointments with my nutritionist at 18:00 on Fridays, I suppose that’s what’s reflected on the heatmap plot.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In this post I used my Uber rides data to practice how to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Correctly parse a UTC offset with &lt;code&gt;readr::parse_datetime()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Calculate intervals and durations with the lubridate&amp;rsquo;s interval operator ( &lt;code&gt;%--%&lt;/code&gt;), and the &lt;code&gt;lubridate::dminutes()&lt;/code&gt; function.&lt;/li&gt;
+&lt;li&gt;Extract date-time components with lubridate’s &lt;code&gt;year()&lt;/code&gt;, &lt;code&gt;month()&lt;/code&gt;, &lt;code&gt;hour()&lt;/code&gt;, and &lt;code&gt;wday()&lt;/code&gt; functions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;This post was updated on November 26, 2020.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;info &amp;lt;- sessionInfo()
+toLatex(info, locale = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## \begin{itemize}\raggedright
+##   \item R version 4.0.3 (2020-10-10), \verb|x86_64-pc-linux-gnu|
+##   \item Running under: \verb|Ubuntu 20.04.1 LTS|
+##   \item Matrix products: default
+##   \item BLAS:   \verb|/usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0|
+##   \item LAPACK: \verb|/usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0|
+##   \item Base packages: base, datasets, graphics, grDevices, methods,
+##     stats, utils
+##   \item Other packages: dplyr~1.0.2, forcats~0.5.0, ggplot2~3.3.2,
+##     lubridate~1.7.9, purrr~0.3.4, readr~1.3.1, stringr~1.4.0,
+##     tibble~3.0.3, tidyr~1.1.2, tidyverse~1.3.0
+##   \item Loaded via a namespace (and not attached): abind~1.4-5,
+##     assertthat~0.2.1, backports~1.1.9, blob~1.2.1, blogdown~0.20,
+##     bookdown~0.20, broom~0.7.0, car~3.0-9, carData~3.0-4,
+##     cellranger~1.1.0, cli~2.0.2, colorspace~1.4-1, compiler~4.0.3,
+##     cowplot~1.0.0, crayon~1.3.4, curl~4.3, data.table~1.13.0,
+##     DBI~1.1.0, dbplyr~1.4.4, digest~0.6.25, ellipsis~0.3.1,
+##     evaluate~0.14, fansi~0.4.1, farver~2.0.3, foreign~0.8-80, fs~1.5.0,
+##     generics~0.0.2, ggpubr~0.4.0, ggsignif~0.6.0, glue~1.4.2,
+##     grid~4.0.3, gtable~0.3.0, haven~2.3.1, hms~0.5.3, htmltools~0.5.0,
+##     httr~1.4.2, jsonlite~1.7.1, knitr~1.29, labeling~0.3,
+##     lattice~0.20-41, lifecycle~0.2.0, magrittr~1.5, Matrix~1.2-18,
+##     mgcv~1.8-33, modelr~0.1.8, munsell~0.5.0, nlme~3.1-149,
+##     openxlsx~4.1.5, pillar~1.4.6, pkgconfig~2.0.3, R6~2.4.1,
+##     Rcpp~1.0.5, readxl~1.3.1, reprex~0.3.0, rio~0.5.16, rlang~0.4.7,
+##     rmarkdown~2.3, rstatix~0.6.0, rstudioapi~0.11, rvest~0.3.6,
+##     scales~1.1.1, splines~4.0.3, stringi~1.4.6, tidyselect~1.1.0,
+##     tools~4.0.3, utf8~1.1.4, vctrs~0.3.4, viridisLite~0.3.0,
+##     withr~2.2.0, xfun~0.16, xml2~1.3.2, yaml~2.2.1, zip~2.1.1
+## \end{itemize}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My Experience at the CDSB Workshop 2019</title>
+      <link>https://sdgamboa.github.io/post/2019_cdsb/</link>
+      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://sdgamboa.github.io/post/2019_cdsb/</guid>
+      <description>&lt;p&gt;I have been using R and Rstudio for a while in some of my bioinformatics projects, which has given me the chance to learn the basics of the language. On this ocassion, I had the opportunity to delve into some more advanced topics by attending to the &lt;a href=&#34;https://comunidadbioinfo.github.io/post/building-tidy-tools-cdsb-runconf-2019/#.XX_gd_dRezK&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;“CDSB Workshop 2019: How to Build and Create Tidy Tools”&lt;/a&gt;, an international workshop held at the Center for Genomic Sciences (CCG) of the National Autonomous University of Mexico (UNAM) in Cuernavaca, Morelos. This one-week workshop was imparted by three experienced R software developers and scientists in the field of bioinformatics:  &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/lcollado/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Leo&lt;/a&gt;, &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/areyes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alex&lt;/a&gt;, and &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/amedina/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ale Medina&lt;/a&gt;. &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/mteresa/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tere&lt;/a&gt;, a data scientist, was also supporting us during the collaborative projects. I had high expectations about the workshop and I wasn’t disappointed. We, the attendees, received training about how to create our own R packages, unit testing, functional programming, package documentation, sharing and collaboration via GitHub, and other related topics. I must admit that keeping the pace of the workshop was a bit of a challenge for me, but the atmosphere was always friendly, respectful, and supportive. Doubts were always cleared. Furthermore, I had the chance to meet other attendees of varied disciplines, projects, and backgrounds who also use R in their work, which I think is an important aspect of this kind of events. On the last two days of the workshop we were asked to divide into teams and work in common projects via GitHub, similarly to the &lt;a href=&#34;https://unconf18.ropensci.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;runconf&lt;/a&gt; events. I teamed up with Mirna, Claire, and Leo in the creation of a package (easyweb) that would allow anyone to easily build a personal site in the internet using R markdown and Rstudio. What were the lasting contributions of this workshop to my career? I’d say an increased sense of awareness about how things are done in the R community, a set of resources (which I hadn’t considered before) to keep improving my knowledge and skills about R, and being part of a community of R users and developers with whom to share knowledge, ideas, projects, work, and ask for help. At the end of the day, no one can actually teach you to program, it’s a lifetime journey in which you polish your skills and learn from errors and other’s experience (tutorials, forums, books). However, a little push in the right direction, such as this workshop, can save you a lot of time in such a journey. Doubtless, this whole experience has been a boost for me in my chasing of doing better bioinformatics with R.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

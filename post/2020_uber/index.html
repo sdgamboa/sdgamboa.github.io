@@ -1,0 +1,1522 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Samuel David Gamboa-Tuz">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="I use my Uber data to try the lubridate package for handling dates and times in R.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://sdgamboa.github.io/post/2020_uber/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#1565c0">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.3aad675291f323c3cd47ae187f0bf0d6.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png">
+
+  <link rel="canonical" href="https://sdgamboa.github.io/post/2020_uber/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@samueldgamboa">
+  <meta property="twitter:creator" content="@samueldgamboa">
+  
+  <meta property="og:site_name" content="Samuel David Gamboa-Tuz, Ph.D.">
+  <meta property="og:url" content="https://sdgamboa.github.io/post/2020_uber/">
+  <meta property="og:title" content="Handling Dates and Times in R | Samuel David Gamboa-Tuz, Ph.D.">
+  <meta property="og:description" content="I use my Uber data to try the lubridate package for handling dates and times in R."><meta property="og:image" content="https://sdgamboa.github.io/post/2020_uber/featured.jpg">
+  <meta property="twitter:image" content="https://sdgamboa.github.io/post/2020_uber/featured.jpg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-12-18T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-11-26T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sdgamboa.github.io/post/2020_uber/"
+  },
+  "headline": "Handling Dates and Times in R",
+  
+  "image": [
+    "https://sdgamboa.github.io/post/2020_uber/featured.jpg"
+  ],
+  
+  "datePublished": "2019-12-18T00:00:00Z",
+  "dateModified": "2020-11-26T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Samuel David Gamboa-Tuz"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Samuel David Gamboa-Tuz, Ph.D.",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sdgamboa.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "I use my Uber data to try the lubridate package for handling dates and times in R."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Handling Dates and Times in R | Samuel David Gamboa-Tuz, Ph.D.</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.b20832291a70195653d72fb87cb61d2f.js"></script>
+
+  
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Samuel David Gamboa-Tuz, Ph.D.</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Samuel David Gamboa-Tuz, Ph.D.</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/media/CV_SDGT.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Handling Dates and Times in R</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span class="author-highlighted">
+      Samuel David Gamboa-Tuz</span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Nov 26, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 1200px; max-height: 800px;">
+  <div style="position: relative">
+    <img src="/post/2020_uber/featured_hu3d03a01dcc18bc5be0e67db3d8d209a6_6313038_1200x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">Image credit: <a href="https://pixabay.com/photos/app-apple-hand-holding-ios-iphone-2941689/" target="_blank" rel="noopener"><strong>Pixabay</strong></a></span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>The other day I requested my rides data to Uber (<a href="https://help.uber.com/riders/article/download-your-data?nodeId=2c86900d-8408-4bac-b92a-956d793acd11" target="_blank" rel="noopener">here</a>). They replied with a convenient csv file containing detailed information of every ride I took between 2016 and 2019. The dataset included dates and times in UTC format. I used this dataset to try some functions of the lubridate package for handling dates and times in R.</p>
+<pre><code class="language-r"># Load packages
+library(tidyverse)
+library(lubridate)
+</code></pre>
+<h2 id="the-dataset">The dataset</h2>
+<p>Let&rsquo;s start by importing the dataset. I removed four columns containing my
+address information beforehand. Still, I won&rsquo;t be sharing the full dataset since it contains detailed information about the starting and ending times of each of my rides. However, you can try the code posted here with <a href="https://help.uber.com/riders/article/download-your-data?nodeId=2c86900d-8408-4bac-b92a-956d793acd11" target="_blank" rel="noopener">you&rsquo;re own Uber data</a>.</p>
+<p>I&rsquo;ll import the dataset with the <code>readr::read_csv()</code> function and check its
+structure.</p>
+<pre><code class="language-r"># Open file
+filename &lt;- &quot;./_files/trips_data.csv&quot;
+uber_data &lt;- read_csv(filename)
+
+# See first rows of data
+uber_data
+</code></pre>
+<pre><code>## # A tibble: 184 x 9
+##    City  `Product Type` `Trip or Order … `Request Time` `Begin Trip Tim…
+##    &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;          &lt;chr&gt;           
+##  1 Meri… UberX          COMPLETED        2019-09-15 00… 2019-09-15 00:5…
+##  2 Meri… UberX          COMPLETED        2019-09-14 19… 2019-09-14 19:0…
+##  3 Meri… UberX          COMPLETED        2019-09-14 04… 2019-09-14 04:1…
+##  4 Meri… UberX          COMPLETED        2019-09-07 04… 2019-09-07 04:3…
+##  5 Meri… UberX          COMPLETED        2019-09-02 14… 2019-09-02 14:0…
+##  6 Meri… UberX          COMPLETED        2019-08-30 19… 2019-08-30 19:0…
+##  7 Meri… UberX          COMPLETED        2019-08-06 02… 2019-08-06 02:3…
+##  8 Meri… UberX          COMPLETED        2019-07-21 18… 2019-07-21 18:4…
+##  9 Meri… UberX          COMPLETED        2019-07-07 13… 2019-07-07 14:0…
+## 10 Meri… UberX          COMPLETED        2019-06-29 03… 2019-06-29 03:2…
+## # … with 174 more rows, and 4 more variables: `Dropoff Time` &lt;chr&gt;, `Distance
+## #   (miles)` &lt;dbl&gt;, `Fare Amount` &lt;dbl&gt;, `Fare Currency` &lt;chr&gt;
+</code></pre>
+<pre><code class="language-r"># See data structure
+map(uber_data, unique) %&gt;% 
+  str()
+</code></pre>
+<pre><code>## List of 9
+##  $ City                : chr [1:2] &quot;Merida&quot; &quot;Mexico City&quot;
+##  $ Product Type        : chr [1:2] &quot;UberX&quot; &quot;uberX&quot;
+##  $ Trip or Order Status: chr [1:3] &quot;COMPLETED&quot; &quot;CANCELED&quot; &quot;DRIVER_CANCELED&quot;
+##  $ Request Time        : chr [1:184] &quot;2019-09-15 00:45:08 +0000 UTC&quot; &quot;2019-09-14 19:02:06 +0000 UTC&quot; &quot;2019-09-14 04:09:58 +0000 UTC&quot; &quot;2019-09-07 04:27:39 +0000 UTC&quot; ...
+##  $ Begin Trip Time     : chr [1:179] &quot;2019-09-15 00:52:08 +0000 UTC&quot; &quot;2019-09-14 19:06:36 +0000 UTC&quot; &quot;2019-09-14 04:15:48 +0000 UTC&quot; &quot;2019-09-07 04:30:06 +0000 UTC&quot; ...
+##  $ Dropoff Time        : chr [1:179] &quot;2019-09-15 01:00:35 +0000 UTC&quot; &quot;2019-09-14 19:10:24 +0000 UTC&quot; &quot;2019-09-14 04:23:46 +0000 UTC&quot; &quot;2019-09-07 04:34:55 +0000 UTC&quot; ...
+##  $ Distance (miles)    : num [1:131] 1.82 0.94 2.49 1.41 1.12 1.4 3.74 3.34 5.95 4 ...
+##  $ Fare Amount         : num [1:148] 63.2 22.8 37.7 26.7 25.4 ...
+##  $ Fare Currency       : chr &quot;MXN&quot;
+</code></pre>
+<p>The dataset has nine columns:</p>
+<table>
+<thead>
+<tr>
+<th>Column name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>City</td>
+<td>The city where the ride was requested (Merida or Mexico City).</td>
+</tr>
+<tr>
+<td>Product Type</td>
+<td>Type of servide: Uberx or uberX. They&rsquo;re both the same.</td>
+</tr>
+<tr>
+<td>Trip or Order status</td>
+<td>Whether the trip was canceled, completed, or canceled by driver.</td>
+</tr>
+<tr>
+<td>Request Time</td>
+<td>Date and time when the trip was requested in UTC.</td>
+</tr>
+<tr>
+<td>Begin Trip Time</td>
+<td>Date and time when the trip started in UTC.</td>
+</tr>
+<tr>
+<td>Dropoff Time</td>
+<td>Date and time when the trip finished in UTC.</td>
+</tr>
+<tr>
+<td>Distance (miles)</td>
+<td>Total distance of the trip in miles.</td>
+</tr>
+<tr>
+<td>Fare Amount</td>
+<td>How much did the trip cost.</td>
+</tr>
+<tr>
+<td>Fare Currency</td>
+<td>Currency. All in Mexican pesos (MXN).</td>
+</tr>
+</tbody>
+</table>
+<p>I don&rsquo;t need all of this information. I only want to analyze the trips that happened in
+Merida, where I&rsquo;m from and where most of the trips occurred. I don&rsquo;t need the
+Product Type nor the Fare Currency columns since they both contain a single type of value each. So, I&rsquo;ll only keep the distance, fare, and date-time data of the completed rides. Also, I need to change the names of the columns for ones that are easier to write.</p>
+<pre><code class="language-r">uber_data &lt;- uber_data %&gt;%
+  filter(City == &quot;Merida&quot;, `Trip or Order Status` == &quot;COMPLETED&quot;) %&gt;% 
+  select(request_time = `Request Time`, begin_time = `Begin Trip Time`,
+         dropoff_time = `Dropoff Time`, distance = `Distance (miles)`,
+         fare = `Fare Amount`)
+
+uber_data
+</code></pre>
+<pre><code>## # A tibble: 173 x 5
+##    request_time          begin_time          dropoff_time         distance  fare
+##    &lt;chr&gt;                 &lt;chr&gt;               &lt;chr&gt;                   &lt;dbl&gt; &lt;dbl&gt;
+##  1 2019-09-15 00:45:08 … 2019-09-15 00:52:0… 2019-09-15 01:00:35…     1.82  63.2
+##  2 2019-09-14 19:02:06 … 2019-09-14 19:06:3… 2019-09-14 19:10:24…     0.94  22.8
+##  3 2019-09-14 04:09:58 … 2019-09-14 04:15:4… 2019-09-14 04:23:46…     2.49  37.7
+##  4 2019-09-07 04:27:39 … 2019-09-07 04:30:0… 2019-09-07 04:34:55…     1.41  26.7
+##  5 2019-09-02 14:04:26 … 2019-09-02 14:06:4… 2019-09-02 14:12:28…     1.12  25.4
+##  6 2019-08-30 19:01:33 … 2019-08-30 19:07:1… 2019-08-30 19:21:54…     1.4   36.3
+##  7 2019-08-06 02:31:16 … 2019-08-06 02:34:4… 2019-08-06 02:48:46…     3.74  52.9
+##  8 2019-07-21 18:36:19 … 2019-07-21 18:40:1… 2019-07-21 18:55:17…     3.34  62.3
+##  9 2019-07-07 13:54:41 … 2019-07-07 14:01:0… 2019-07-07 14:14:24…     5.95  56.1
+## 10 2019-06-29 03:20:57 … 2019-06-29 03:26:4… 2019-06-29 03:44:50…     4     58.1
+## # … with 163 more rows
+</code></pre>
+<p>The dataset looks better now. However, the request_time, begin_time, and  dropoff_time columns,
+which contain date and time values, are stored as character vectors. It would be better to have
+them in a specialized vector for handling dates and times.</p>
+<h2 id="parsing-dates-and-times">Parsing dates and times</h2>
+<p>In R, date and time data can be handled as:</p>
+<ul>
+<li><strong>Date</strong> vectors, for dates.</li>
+<li><strong>POSIXct</strong> or <strong>POSIXlt</strong> vectors, for date-time data.</li>
+<li><strong>difftime</strong> vectors, for duration.</li>
+</ul>
+<p>If you want to know more about these types of vectors, <a href="https://www.r-bloggers.com/2020/04/a-comprehensive-introduction-to-handling-date-time-in-r/" target="_blank" rel="noopener">this blog post</a> offers a good introduction to the use of dates and times in R. In this case, a POSIXct vector would be appropiate to store and handle my data.</p>
+<p>Usually, <code>read_csv()</code> does a good job in guessing how dates and times are stored when they&rsquo;re in ISO 8601 format,
+but in this case the UTC offset is not recognized (+0000). So, I need to parse it explicity with the
+<code>readr::parse_datetime()</code> function. Also, I want to convert the time format from UTC to local time for an easier use.</p>
+<pre><code class="language-r">my_time_zone &lt;- Sys.timezone() # I'm in &quot;America/Merida&quot; time zone at the moment of writing this post. Check OlsonNames() for more time zones.
+
+uber_data &lt;- uber_data %&gt;% 
+  map_if(is.character,
+         ~readr::parse_datetime(.x,
+                         format = &quot;%Y-%m-%d %H:%M:%S %z %Z&quot;,
+                         locale = locale(tz = my_time_zone))) %&gt;%
+  as_tibble()
+uber_data
+</code></pre>
+<pre><code>## # A tibble: 173 x 5
+##    request_time        begin_time          dropoff_time        distance  fare
+##    &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;                 &lt;dbl&gt; &lt;dbl&gt;
+##  1 2019-09-14 19:45:08 2019-09-14 19:52:08 2019-09-14 20:00:35     1.82  63.2
+##  2 2019-09-14 14:02:06 2019-09-14 14:06:36 2019-09-14 14:10:24     0.94  22.8
+##  3 2019-09-13 23:09:58 2019-09-13 23:15:48 2019-09-13 23:23:46     2.49  37.7
+##  4 2019-09-06 23:27:39 2019-09-06 23:30:06 2019-09-06 23:34:55     1.41  26.7
+##  5 2019-09-02 09:04:26 2019-09-02 09:06:49 2019-09-02 09:12:28     1.12  25.4
+##  6 2019-08-30 14:01:33 2019-08-30 14:07:15 2019-08-30 14:21:54     1.4   36.3
+##  7 2019-08-05 21:31:16 2019-08-05 21:34:49 2019-08-05 21:48:46     3.74  52.9
+##  8 2019-07-21 13:36:19 2019-07-21 13:40:11 2019-07-21 13:55:17     3.34  62.3
+##  9 2019-07-07 08:54:41 2019-07-07 09:01:06 2019-07-07 09:14:24     5.95  56.1
+## 10 2019-06-28 22:20:57 2019-06-28 22:26:41 2019-06-28 22:44:50     4     58.1
+## # … with 163 more rows
+</code></pre>
+<p>In the code above I used <code>purrr::map_if()</code> to parse the character vectors in the
+dataset to POSIXct vectors. Remember that map functions give a list as output, so I had to convert the output back to a tibble.</p>
+<p>Within the <code>parse_date()</code> function I used two arguments:</p>
+<ol>
+<li>The format argument with the specifciations for date, time, offset, and UTC.</li>
+<li>The locale argument with my current time zone (&ldquo;America/Merida&rdquo;).</li>
+</ol>
+<p>Now, the dates and times in my dataset are in the correct object type (POSIXct vectors) and I can handle them easily with functions of the lubridate package.</p>
+<h2 id="getting-duration-of-the-trips">Getting duration of the trips</h2>
+<p>Now that the datetime columns have been parsed correctly and are in the local time zone, it’s easy to do calculations with them.</p>
+<p>Let&rsquo;s calculate how much time did I wait for each trip and how long each trip lasted. I can calcuate how much I waited for each trip by estimating the interval between the time of request and the time of start of my trips. An interval between the start of the trip and the time of arrival will tell me how long a trip lasted. I&rsquo;ll use the &ldquo;interlval operator&rdquo; (<code>%--%</code>) from the lubridate package to get these intervals.</p>
+<p>I&rsquo;ll also convert the distance to km and calculate the overall fare rate of each trip.</p>
+<pre><code class="language-r">uber_data &lt;- uber_data %&gt;% 
+  mutate(wait = request_time %--% begin_time / dminutes(1),
+         duration = begin_time %--% dropoff_time / dminutes(1),
+         distance = distance * 1.60934,
+         rate = fare / distance)
+str(uber_data)
+</code></pre>
+<pre><code>## tibble [173 × 8] (S3: tbl_df/tbl/data.frame)
+##  $ request_time: POSIXct[1:173], format: &quot;2019-09-14 19:45:08&quot; &quot;2019-09-14 14:02:06&quot; ...
+##  $ begin_time  : POSIXct[1:173], format: &quot;2019-09-14 19:52:08&quot; &quot;2019-09-14 14:06:36&quot; ...
+##  $ dropoff_time: POSIXct[1:173], format: &quot;2019-09-14 20:00:35&quot; &quot;2019-09-14 14:10:24&quot; ...
+##  $ distance    : num [1:173] 2.93 1.51 4.01 2.27 1.8 ...
+##  $ fare        : num [1:173] 63.2 22.8 37.7 26.7 25.4 ...
+##  $ wait        : num [1:173] 7 4.5 5.83 2.45 2.38 ...
+##  $ duration    : num [1:173] 8.45 3.8 7.97 4.82 5.65 ...
+##  $ rate        : num [1:173] 21.6 15.1 9.4 11.8 14.1 ...
+</code></pre>
+<p>In the code above, I divided the intervals by 1 minute to get the output in minutes. The <code>dminutes()</code> is from the lubridate package as well.</p>
+<p>Let&rsquo;s look at the frequency distribution of my wait times between request and beginning of my trips.</p>
+<pre><code class="language-r">p1 &lt;- uber_data %&gt;% 
+  ggplot(aes(wait)) +
+  geom_histogram(binwidth = 1, fill = &quot;firebrick4&quot;, alpha = 0.7) +
+  labs(x = &quot;Wait time (min)&quot;, y = &quot;Frequency&quot;) +
+  scale_x_continuous(breaks = seq(1,15,1)) +
+  theme_classic()
+p1
+</code></pre>
+<img src="index_files/figure-html/Histogram-1.png" width="672" />
+<p>It seems that most of the times I waited between 2 and 6 minutes. Once, I waited 15 minutes!</p>
+<p>I&rsquo;ll use tidyeval to create a function that allows me to create a scatter plot between the different variables of the dataset.</p>
+<pre><code class="language-r">get_label &lt;- function(x) {
+  x_var &lt;- rlang::as_name(enquo(x))
+  return(case_when(x_var == &quot;distance&quot; ~ &quot;Distance (Km)&quot;,
+                   x_var == &quot;duration&quot; ~ &quot;Duration (min)&quot;,
+                   x_var == &quot;fare&quot; ~ &quot;Fare (MXN)&quot;,
+                   x_var == &quot;rate&quot; ~ &quot;Fare Rate (MXN/Km)&quot;,
+                   x_var == &quot;wait&quot; ~ &quot;Wait Time (min)&quot;))
+}
+
+make_scatter_plot &lt;- function(x, y) {
+  x_var &lt;- enquo(x)
+  y_var &lt;- enquo(y)
+  uber_data %&gt;% 
+    ggplot(aes(!!x_var, !!y_var)) +
+    labs(x = get_label(!!x_var), y = get_label(!!y_var)) +
+    geom_smooth() +
+    geom_point(size = 0.75, color = &quot;firebrick4&quot;) +
+    theme_bw()
+}
+
+p2 &lt;- make_scatter_plot(duration, fare)
+p3 &lt;- make_scatter_plot(distance, fare)
+p4 &lt;- make_scatter_plot(distance, duration)
+p5 &lt;- make_scatter_plot(duration, rate)
+
+ggpubr::ggarrange(p2, p3, p4, p5)
+</code></pre>
+<img src="index_files/figure-html/Scatter Plot-1.png" width="768" />
+<p>Not suprisingly, longer trips were more expensive.</p>
+<h2 id="extracting-time-components-from-date-time-vectors">Extracting time components from date-time vectors</h2>
+<p>Individual datetime components can be extracted with lubridate. For example, here is a bar plot depicting the number of Uber rides I took per month (<code>lubridate::month()</code>) and year (<code>lubridate::year()</code>):</p>
+<pre><code class="language-r">total_number_of_trips &lt;- length(uber_data$request_time)
+
+p6 &lt;- uber_data %&gt;%
+  group_by(year = year(request_time),
+           month = month(request_time, label = TRUE)
+           ) %&gt;% 
+  summarise(percent = n() / total_number_of_trips) %&gt;% 
+  ungroup() %&gt;% 
+  ggplot(aes(month, percent, fill = factor(year))) +
+  geom_col(aes(group = factor(year))) +
+  facet_wrap(. ~ factor(year), strip.position = &quot;top&quot;) +
+  labs(x = &quot;Month&quot;, y = &quot;Trips (%)&quot;) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_viridis_d(option = &quot;E&quot;) +
+  guides(fill = guide_legend(title = &quot;Year&quot;)) +
+  theme(panel.grid.major.x =  element_blank())
+p6
+</code></pre>
+<img src="index_files/figure-html/Bar Plot-1.png" width="720" />
+<p>And, here is a heatmap about the number of trips I took per day of the week (<code>lubridate::wday()</code>) and hour (<code>lubridate::hour</code>):</p>
+<pre><code class="language-r">p7 &lt;- uber_data %&gt;% 
+  count(day = wday(request_time, label = TRUE),
+        hour = hour(request_time),
+        name = &quot;Count&quot;) %&gt;% 
+  filter(between(hour, 12, 21)) %&gt;%
+  ggplot() +
+  geom_tile(aes(x = day, y = factor(hour), fill = Count)) +
+  labs(x = &quot;Day&quot;, y = &quot;Hour (24 h)&quot;) +
+  guides(fill = guide_colorbar(title = &quot;Count&quot;)) +
+  theme_classic()
+p7
+</code></pre>
+<img src="index_files/figure-html/Heatmap-1.png" width="480" />
+<p>I made a lot of Uber requests between the 17:00 and 18:00 hours on Fridays. I used to have appointments with my nutritionist at 18:00 on Fridays, I suppose that’s what’s reflected on the heatmap plot.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this post I used my Uber rides data to practice how to:</p>
+<ul>
+<li>Correctly parse a UTC offset with <code>readr::parse_datetime()</code>.</li>
+<li>Calculate intervals and durations with the lubridate&rsquo;s interval operator ( <code>%--%</code>), and the <code>lubridate::dminutes()</code> function.</li>
+<li>Extract date-time components with lubridate’s <code>year()</code>, <code>month()</code>, <code>hour()</code>, and <code>wday()</code> functions.</li>
+</ul>
+<hr>
+<p>This post was updated on November 26, 2020.</p>
+<pre><code class="language-r">info &lt;- sessionInfo()
+toLatex(info, locale = FALSE)
+</code></pre>
+<pre><code>## \begin{itemize}\raggedright
+##   \item R version 4.0.3 (2020-10-10), \verb|x86_64-pc-linux-gnu|
+##   \item Running under: \verb|Ubuntu 20.04.1 LTS|
+##   \item Matrix products: default
+##   \item BLAS:   \verb|/usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0|
+##   \item LAPACK: \verb|/usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0|
+##   \item Base packages: base, datasets, graphics, grDevices, methods,
+##     stats, utils
+##   \item Other packages: dplyr~1.0.2, forcats~0.5.0, ggplot2~3.3.2,
+##     lubridate~1.7.9, purrr~0.3.4, readr~1.3.1, stringr~1.4.0,
+##     tibble~3.0.3, tidyr~1.1.2, tidyverse~1.3.0
+##   \item Loaded via a namespace (and not attached): abind~1.4-5,
+##     assertthat~0.2.1, backports~1.1.9, blob~1.2.1, blogdown~0.20,
+##     bookdown~0.20, broom~0.7.0, car~3.0-9, carData~3.0-4,
+##     cellranger~1.1.0, cli~2.0.2, colorspace~1.4-1, compiler~4.0.3,
+##     cowplot~1.0.0, crayon~1.3.4, curl~4.3, data.table~1.13.0,
+##     DBI~1.1.0, dbplyr~1.4.4, digest~0.6.25, ellipsis~0.3.1,
+##     evaluate~0.14, fansi~0.4.1, farver~2.0.3, foreign~0.8-80, fs~1.5.0,
+##     generics~0.0.2, ggpubr~0.4.0, ggsignif~0.6.0, glue~1.4.2,
+##     grid~4.0.3, gtable~0.3.0, haven~2.3.1, hms~0.5.3, htmltools~0.5.0,
+##     httr~1.4.2, jsonlite~1.7.1, knitr~1.29, labeling~0.3,
+##     lattice~0.20-41, lifecycle~0.2.0, magrittr~1.5, Matrix~1.2-18,
+##     mgcv~1.8-33, modelr~0.1.8, munsell~0.5.0, nlme~3.1-149,
+##     openxlsx~4.1.5, pillar~1.4.6, pkgconfig~2.0.3, R6~2.4.1,
+##     Rcpp~1.0.5, readxl~1.3.1, reprex~0.3.0, rio~0.5.16, rlang~0.4.7,
+##     rmarkdown~2.3, rstatix~0.6.0, rstudioapi~0.11, rvest~0.3.6,
+##     scales~1.1.1, splines~4.0.3, stringi~1.4.6, tidyselect~1.1.0,
+##     tools~4.0.3, utf8~1.1.4, vctrs~0.3.4, viridisLite~0.3.0,
+##     withr~2.2.0, xfun~0.16, xml2~1.3.2, yaml~2.2.1, zip~2.1.1
+## \end{itemize}
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/lubridate/">Lubridate</a>
+  
+  <a class="badge badge-light" href="/tag/rstats/">Rstats</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://sdgamboa.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu600e407af55889153ab71b22847e404d_4418717_270x270_fill_lanczos_center_3.png" alt="Samuel David Gamboa-Tuz"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://sdgamboa.github.io/">Samuel David Gamboa-Tuz</a></h5>
+      <h6 class="card-subtitle">Ph.D. in Biological Sciences</h6>
+      <p class="card-text">My research interests include bioinformatics, molecular biology, and evolution.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/samueldgamboa" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://bit.ly/sdgt-scholar" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/sdgamboa" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.researchgate.net/profile/Samuel_Gamboa-Tuz" target="_blank" rel="noopener">
+        <i class="fab fa-researchgate"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/sdgamboa/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0002-6863-7943" target="_blank" rel="noopener">
+        <i class="ai ai-orcid"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/2020_volcano/">Visualization of Volcano Plots in R</a></li>
+      
+      <li><a href="/post/2019_cdsb/">My Experience at the CDSB Workshop 2019</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Samuel David Gamboa-Tuz, 2019-2022
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.9c6648bbcbf0a1b17b01ba40e6757d84.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
