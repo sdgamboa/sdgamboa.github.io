@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ancient DNA | Samuel David Gamboa-Tuz, Ph.D.</title>
-    <link>https://sdgamboa.github.io/tag/ancient-dna/</link>
-      <atom:link href="https://sdgamboa.github.io/tag/ancient-dna/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tag/ancient-dna/</link>
+      <atom:link href="/tag/ancient-dna/index.xml" rel="self" type="application/rss+xml" />
     <description>Ancient DNA</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2022</copyright><lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://sdgamboa.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Ancient DNA</title>
-      <link>https://sdgamboa.github.io/tag/ancient-dna/</link>
+      <link>/tag/ancient-dna/</link>
     </image>
     
     <item>
       <title>Paleogenomics, a Glimpse to the DNA of the Past</title>
-      <link>https://sdgamboa.github.io/post/2020_paleogenomics/</link>
+      <link>/post/2020_paleogenomics/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2020_paleogenomics/</guid>
+      <guid>/post/2020_paleogenomics/</guid>
       <description>&lt;p&gt;Do you remember that famous dinosaur movie released in 1993, in which some scientists brought the enormous reptiles back to life to create a theme park on a remote island? In the movie, the scientists obtained dinosaur DNA from blood samples preserved in mosquitoes fossilized in amber. Since the samples were very ancient, the dinosaur DNA was degraded and incomplete, so they used amphibian DNA to fill the gaps and bring back the prehistoric reptiles. Such as in the movie, real-life scientists are also interested in the recovery and study of ancient DNA samples from extinct organisms. Not to bring them back to life, but to answer relevant scientific questions. This can be achieved by sequencing and analyzing a &lt;strong&gt;paleogenome&lt;/strong&gt;, the genome of an extinct organism; for example, the genome of a mammoth, the neanderthals, or an extinct plant. In the present article, we’ll explore what it is about and a few applications of the scientific field that aims to reconstruct and study ancient DNA: &lt;strong&gt;paleogenomics&lt;/strong&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;A paleogenome is the genome of an extinct organism; for example, the genome of a mammoth, the neanderthals, or an extinct plant.&lt;/p&gt;

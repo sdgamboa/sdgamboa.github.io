@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publications | Samuel David Gamboa-Tuz, Ph.D.</title>
-    <link>https://sdgamboa.github.io/publication/</link>
-      <atom:link href="https://sdgamboa.github.io/publication/index.xml" rel="self" type="application/rss+xml" />
+    <link>/publication/</link>
+      <atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
     <description>Publications</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2022</copyright><lastBuildDate>Fri, 03 Dec 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://sdgamboa.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Publications</title>
-      <link>https://sdgamboa.github.io/publication/</link>
+      <link>/publication/</link>
     </image>
     
     <item>
       <title>Phylogenomic and microsynteny analysis provides evidence of genome arrangements of high-affinity nitrate transporter gene families of plants</title>
-      <link>https://sdgamboa.github.io/publication/2021_nrt2_3/</link>
+      <link>/publication/2021_nrt2_3/</link>
       <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2021_nrt2_3/</guid>
+      <guid>/publication/2021_nrt2_3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>The SoNAP gene from sugarcane (Saccharum officinarum) encodes a senescence-associated NAC transcription factor involved in response to osmotic and salt stress</title>
-      <link>https://sdgamboa.github.io/publication/2020_sonap/</link>
+      <link>/publication/2020_sonap/</link>
       <pubDate>Fri, 23 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2020_sonap/</guid>
+      <guid>/publication/2020_sonap/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Fibrillarin evolution through the tree of life: Comparative genomics and microsynteny network analyses provide new insights into the evolutionary history of Fibrillarin</title>
-      <link>https://sdgamboa.github.io/publication/2020_fib/</link>
+      <link>/publication/2020_fib/</link>
       <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2020_fib/</guid>
+      <guid>/publication/2020_fib/</guid>
       <description></description>
     </item>
     
@@ -41,25 +41,25 @@
 responses and regulatory hubs under mild and severe drought in 
 papaya (Carica papaya L.)
 </title>
-      <link>https://sdgamboa.github.io/publication/2018_papaya_transcriptome/</link>
+      <link>/publication/2018_papaya_transcriptome/</link>
       <pubDate>Wed, 28 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2018_papaya_transcriptome/</guid>
+      <guid>/publication/2018_papaya_transcriptome/</guid>
       <description></description>
     </item>
     
     <item>
       <title>New insights into the phylogeny of the TMBIM superfamily across the tree of life: Comparative genomics and synteny networks reveal independent evolution of the BI and LFG families in plants</title>
-      <link>https://sdgamboa.github.io/publication/2018_tmbim/</link>
+      <link>/publication/2018_tmbim/</link>
       <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2018_tmbim/</guid>
+      <guid>/publication/2018_tmbim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Transcriptome, genetic transformation and micropropagation: Some biotechnology strategies to diminish water stress caused by climate change in sugarcane</title>
-      <link>https://sdgamboa.github.io/publication/2017_intech_chapter/</link>
+      <link>/publication/2017_intech_chapter/</link>
       <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2017_intech_chapter/</guid>
+      <guid>/publication/2017_intech_chapter/</guid>
       <description></description>
     </item>
     

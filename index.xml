@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Samuel David Gamboa-Tuz, Ph.D.</title>
-    <link>https://sdgamboa.github.io/</link>
-      <atom:link href="https://sdgamboa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <link>/</link>
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Samuel David Gamboa-Tuz, Ph.D.</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2022</copyright><lastBuildDate>Fri, 03 Dec 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://sdgamboa.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Samuel David Gamboa-Tuz, Ph.D.</title>
-      <link>https://sdgamboa.github.io/</link>
+      <link>/</link>
     </image>
     
     <item>
       <title>Phylogenomic and microsynteny analysis provides evidence of genome arrangements of high-affinity nitrate transporter gene families of plants</title>
-      <link>https://sdgamboa.github.io/publication/2021_nrt2_3/</link>
+      <link>/publication/2021_nrt2_3/</link>
       <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2021_nrt2_3/</guid>
+      <guid>/publication/2021_nrt2_3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Paleogenomics, a Glimpse to the DNA of the Past</title>
-      <link>https://sdgamboa.github.io/post/2020_paleogenomics/</link>
+      <link>/post/2020_paleogenomics/</link>
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2020_paleogenomics/</guid>
+      <guid>/post/2020_paleogenomics/</guid>
       <description>&lt;p&gt;Do you remember that famous dinosaur movie released in 1993, in which some scientists brought the enormous reptiles back to life to create a theme park on a remote island? In the movie, the scientists obtained dinosaur DNA from blood samples preserved in mosquitoes fossilized in amber. Since the samples were very ancient, the dinosaur DNA was degraded and incomplete, so they used amphibian DNA to fill the gaps and bring back the prehistoric reptiles. Such as in the movie, real-life scientists are also interested in the recovery and study of ancient DNA samples from extinct organisms. Not to bring them back to life, but to answer relevant scientific questions. This can be achieved by sequencing and analyzing a &lt;strong&gt;paleogenome&lt;/strong&gt;, the genome of an extinct organism; for example, the genome of a mammoth, the neanderthals, or an extinct plant. In the present article, we’ll explore what it is about and a few applications of the scientific field that aims to reconstruct and study ancient DNA: &lt;strong&gt;paleogenomics&lt;/strong&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;A paleogenome is the genome of an extinct organism; for example, the genome of a mammoth, the neanderthals, or an extinct plant.&lt;/p&gt;
@@ -50,25 +50,25 @@
     
     <item>
       <title>The SoNAP gene from sugarcane (Saccharum officinarum) encodes a senescence-associated NAC transcription factor involved in response to osmotic and salt stress</title>
-      <link>https://sdgamboa.github.io/publication/2020_sonap/</link>
+      <link>/publication/2020_sonap/</link>
       <pubDate>Fri, 23 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2020_sonap/</guid>
+      <guid>/publication/2020_sonap/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Fibrillarin evolution through the tree of life: Comparative genomics and microsynteny network analyses provide new insights into the evolutionary history of Fibrillarin</title>
-      <link>https://sdgamboa.github.io/publication/2020_fib/</link>
+      <link>/publication/2020_fib/</link>
       <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2020_fib/</guid>
+      <guid>/publication/2020_fib/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualization of Volcano Plots in R</title>
-      <link>https://sdgamboa.github.io/post/2020_volcano/</link>
+      <link>/post/2020_volcano/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2020_volcano/</guid>
+      <guid>/post/2020_volcano/</guid>
       <description>&lt;p&gt;A &lt;strong&gt;volcano plot&lt;/strong&gt; is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&amp;rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the &lt;strong&gt;fold change&lt;/strong&gt; (either positive or negative) in the x axis and a &lt;strong&gt;significance value&lt;/strong&gt; (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.&lt;/p&gt;
 &lt;p&gt;In this post I&amp;rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in &lt;strong&gt;R&lt;/strong&gt; using tools from the &lt;strong&gt;tidyverse&lt;/strong&gt;, such as &lt;strong&gt;dplyr&lt;/strong&gt;, &lt;strong&gt;tidyr&lt;/strong&gt;, and &lt;strong&gt;ggplot2&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;r-packages-and-data&#34;&gt;R packages and data&lt;/h2&gt;
@@ -156,7 +156,7 @@ dim(data)
   ylab(expression(&amp;quot;-log&amp;quot;[10]*&amp;quot;FDR&amp;quot;))
 p1
 &lt;/code&gt;&lt;/pre&gt;
-&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/plot 1-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
+&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/plot 1-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
 &lt;p&gt;The dispersion of the points (representing genes) in the plot is similar to, you guessed, a volcano (that&amp;rsquo;s why they&amp;rsquo;re called volcano plots). Since the FDR values were transformed to their -log10, the higher the position of a point, the more significant its value is (y axis). Points with positive fold change values (to the right) are up-regulated and points with negative fold change values (to the left) are down-regulated (x axis).&lt;/p&gt;
 &lt;h2 id=&#34;adding-color-to-differentially-expressed-genes-degs&#34;&gt;Adding color to differentially expressed genes (DEGs)&lt;/h2&gt;
 &lt;p&gt;Differentially expressed genes (DEGs) are usally considered as those with an absolute fold change greater or equal to 2 and a FDR value of 0.05 or less. So, we can make our volcano plot a bit more informative if we add some color to the DEGs in the plot. To do so, we&amp;rsquo;ll add an additional column, named &amp;lsquo;Expression&amp;rsquo;, indicating whether the expression of a gene is up-regulated, down-regulated, or unchanged:&lt;/p&gt;
@@ -233,7 +233,7 @@ head(data) %&amp;gt;%
   guides(colour = guide_legend(override.aes = list(size=1.5))) 
 p2
 &lt;/code&gt;&lt;/pre&gt;
-&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
+&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
 &lt;p&gt;If we want to know how many genes are up- or down-regulated, or unchanged, we can use dplyr&amp;rsquo;s &lt;code&gt;count()&lt;/code&gt; function.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;% 
   count(Expression) %&amp;gt;% 
@@ -345,7 +345,7 @@ head(data) %&amp;gt;%
 
 p3
 &lt;/code&gt;&lt;/pre&gt;
-&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;
 &lt;p&gt;And we can count how many genes are up- or down-regulated according to the different significance thresholds with &lt;code&gt;count()&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;% 
   count(Expression, Significance) %&amp;gt;% 
@@ -593,7 +593,7 @@ top_genes %&amp;gt;%
                    size = 2)
 p3
 &lt;/code&gt;&lt;/pre&gt;
-&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;
 &lt;p&gt;So, only the top 10 up- and down-regulated genes are labeled, avoiding overcrowding.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;In this post we applied two different color schemes on a volcano plot and labeled a few genes using tools from the tidyverse.&lt;/p&gt;
@@ -634,9 +634,9 @@ toLatex(info, locale = FALSE)
     
     <item>
       <title>Handling Dates and Times in R</title>
-      <link>https://sdgamboa.github.io/post/2020_uber/</link>
+      <link>/post/2020_uber/</link>
       <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2020_uber/</guid>
+      <guid>/post/2020_uber/</guid>
       <description>&lt;p&gt;The other day I requested my rides data to Uber (&lt;a href=&#34;https://help.uber.com/riders/article/download-your-data?nodeId=2c86900d-8408-4bac-b92a-956d793acd11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;). They replied with a convenient csv file containing detailed information of every ride I took between 2016 and 2019. The dataset included dates and times in UTC format. I used this dataset to try some functions of the lubridate package for handling dates and times in R.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Load packages
 library(tidyverse)
@@ -952,9 +952,9 @@ toLatex(info, locale = FALSE)
     
     <item>
       <title>My Experience at the CDSB Workshop 2019</title>
-      <link>https://sdgamboa.github.io/post/2019_cdsb/</link>
+      <link>/post/2019_cdsb/</link>
       <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2019_cdsb/</guid>
+      <guid>/post/2019_cdsb/</guid>
       <description>&lt;p&gt;I have been using R and Rstudio for a while in some of my bioinformatics projects, which has given me the chance to learn the basics of the language. On this ocassion, I had the opportunity to delve into some more advanced topics by attending to the &lt;a href=&#34;https://comunidadbioinfo.github.io/post/building-tidy-tools-cdsb-runconf-2019/#.XX_gd_dRezK&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;“CDSB Workshop 2019: How to Build and Create Tidy Tools”&lt;/a&gt;, an international workshop held at the Center for Genomic Sciences (CCG) of the National Autonomous University of Mexico (UNAM) in Cuernavaca, Morelos. This one-week workshop was imparted by three experienced R software developers and scientists in the field of bioinformatics:  &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/lcollado/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Leo&lt;/a&gt;, &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/areyes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alex&lt;/a&gt;, and &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/amedina/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ale Medina&lt;/a&gt;. &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/mteresa/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tere&lt;/a&gt;, a data scientist, was also supporting us during the collaborative projects. I had high expectations about the workshop and I wasn’t disappointed. We, the attendees, received training about how to create our own R packages, unit testing, functional programming, package documentation, sharing and collaboration via GitHub, and other related topics. I must admit that keeping the pace of the workshop was a bit of a challenge for me, but the atmosphere was always friendly, respectful, and supportive. Doubts were always cleared. Furthermore, I had the chance to meet other attendees of varied disciplines, projects, and backgrounds who also use R in their work, which I think is an important aspect of this kind of events. On the last two days of the workshop we were asked to divide into teams and work in common projects via GitHub, similarly to the &lt;a href=&#34;https://unconf18.ropensci.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;runconf&lt;/a&gt; events. I teamed up with Mirna, Claire, and Leo in the creation of a package (easyweb) that would allow anyone to easily build a personal site in the internet using R markdown and Rstudio. What were the lasting contributions of this workshop to my career? I’d say an increased sense of awareness about how things are done in the R community, a set of resources (which I hadn’t considered before) to keep improving my knowledge and skills about R, and being part of a community of R users and developers with whom to share knowledge, ideas, projects, work, and ask for help. At the end of the day, no one can actually teach you to program, it’s a lifetime journey in which you polish your skills and learn from errors and other’s experience (tutorials, forums, books). However, a little push in the right direction, such as this workshop, can save you a lot of time in such a journey. Doubtless, this whole experience has been a boost for me in my chasing of doing better bioinformatics with R.&lt;/p&gt;
 </description>
     </item>
@@ -964,49 +964,49 @@ toLatex(info, locale = FALSE)
 responses and regulatory hubs under mild and severe drought in 
 papaya (Carica papaya L.)
 </title>
-      <link>https://sdgamboa.github.io/publication/2018_papaya_transcriptome/</link>
+      <link>/publication/2018_papaya_transcriptome/</link>
       <pubDate>Wed, 28 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2018_papaya_transcriptome/</guid>
+      <guid>/publication/2018_papaya_transcriptome/</guid>
       <description></description>
     </item>
     
     <item>
       <title>New insights into the phylogeny of the TMBIM superfamily across the tree of life: Comparative genomics and synteny networks reveal independent evolution of the BI and LFG families in plants</title>
-      <link>https://sdgamboa.github.io/publication/2018_tmbim/</link>
+      <link>/publication/2018_tmbim/</link>
       <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2018_tmbim/</guid>
+      <guid>/publication/2018_tmbim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Transcriptome, genetic transformation and micropropagation: Some biotechnology strategies to diminish water stress caused by climate change in sugarcane</title>
-      <link>https://sdgamboa.github.io/publication/2017_intech_chapter/</link>
+      <link>/publication/2017_intech_chapter/</link>
       <pubDate>Wed, 20 Dec 2017 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/publication/2017_intech_chapter/</guid>
+      <guid>/publication/2017_intech_chapter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Papaya tree || Abiotic stress responses</title>
-      <link>https://sdgamboa.github.io/project/cicy_papaya/</link>
+      <link>/project/cicy_papaya/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/project/cicy_papaya/</guid>
+      <guid>/project/cicy_papaya/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sugarcane || Abiotic stress responses</title>
-      <link>https://sdgamboa.github.io/project/cicy_sugarcane/</link>
+      <link>/project/cicy_sugarcane/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/project/cicy_sugarcane/</guid>
+      <guid>/project/cicy_sugarcane/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Understanding gene/genome evolution</title>
-      <link>https://sdgamboa.github.io/project/cicy_gene_evolution/</link>
+      <link>/project/cicy_gene_evolution/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/project/cicy_gene_evolution/</guid>
+      <guid>/project/cicy_gene_evolution/</guid>
       <description></description>
     </item>
     

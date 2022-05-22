@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Workshop | Samuel David Gamboa-Tuz, Ph.D.</title>
-    <link>https://sdgamboa.github.io/tag/workshop/</link>
-      <atom:link href="https://sdgamboa.github.io/tag/workshop/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tag/workshop/</link>
+      <atom:link href="/tag/workshop/index.xml" rel="self" type="application/rss+xml" />
     <description>Workshop</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2022</copyright><lastBuildDate>Sat, 03 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://sdgamboa.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Workshop</title>
-      <link>https://sdgamboa.github.io/tag/workshop/</link>
+      <link>/tag/workshop/</link>
     </image>
     
     <item>
       <title>My Experience at the CDSB Workshop 2019</title>
-      <link>https://sdgamboa.github.io/post/2019_cdsb/</link>
+      <link>/post/2019_cdsb/</link>
       <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2019_cdsb/</guid>
+      <guid>/post/2019_cdsb/</guid>
       <description>&lt;p&gt;I have been using R and Rstudio for a while in some of my bioinformatics projects, which has given me the chance to learn the basics of the language. On this ocassion, I had the opportunity to delve into some more advanced topics by attending to the &lt;a href=&#34;https://comunidadbioinfo.github.io/post/building-tidy-tools-cdsb-runconf-2019/#.XX_gd_dRezK&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;“CDSB Workshop 2019: How to Build and Create Tidy Tools”&lt;/a&gt;, an international workshop held at the Center for Genomic Sciences (CCG) of the National Autonomous University of Mexico (UNAM) in Cuernavaca, Morelos. This one-week workshop was imparted by three experienced R software developers and scientists in the field of bioinformatics:  &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/lcollado/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Leo&lt;/a&gt;, &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/areyes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Alex&lt;/a&gt;, and &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/amedina/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ale Medina&lt;/a&gt;. &lt;a href=&#34;https://comunidadbioinfo.github.io/authors/mteresa/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tere&lt;/a&gt;, a data scientist, was also supporting us during the collaborative projects. I had high expectations about the workshop and I wasn’t disappointed. We, the attendees, received training about how to create our own R packages, unit testing, functional programming, package documentation, sharing and collaboration via GitHub, and other related topics. I must admit that keeping the pace of the workshop was a bit of a challenge for me, but the atmosphere was always friendly, respectful, and supportive. Doubts were always cleared. Furthermore, I had the chance to meet other attendees of varied disciplines, projects, and backgrounds who also use R in their work, which I think is an important aspect of this kind of events. On the last two days of the workshop we were asked to divide into teams and work in common projects via GitHub, similarly to the &lt;a href=&#34;https://unconf18.ropensci.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;runconf&lt;/a&gt; events. I teamed up with Mirna, Claire, and Leo in the creation of a package (easyweb) that would allow anyone to easily build a personal site in the internet using R markdown and Rstudio. What were the lasting contributions of this workshop to my career? I’d say an increased sense of awareness about how things are done in the R community, a set of resources (which I hadn’t considered before) to keep improving my knowledge and skills about R, and being part of a community of R users and developers with whom to share knowledge, ideas, projects, work, and ask for help. At the end of the day, no one can actually teach you to program, it’s a lifetime journey in which you polish your skills and learn from errors and other’s experience (tutorials, forums, books). However, a little push in the right direction, such as this workshop, can save you a lot of time in such a journey. Doubtless, this whole experience has been a boost for me in my chasing of doing better bioinformatics with R.&lt;/p&gt;
 </description>
     </item>

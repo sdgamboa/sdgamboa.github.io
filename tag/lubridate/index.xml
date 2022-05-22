@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lubridate | Samuel David Gamboa-Tuz, Ph.D.</title>
-    <link>https://sdgamboa.github.io/tag/lubridate/</link>
-      <atom:link href="https://sdgamboa.github.io/tag/lubridate/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tag/lubridate/</link>
+      <atom:link href="/tag/lubridate/index.xml" rel="self" type="application/rss+xml" />
     <description>Lubridate</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2022</copyright><lastBuildDate>Wed, 18 Dec 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://sdgamboa.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Lubridate</title>
-      <link>https://sdgamboa.github.io/tag/lubridate/</link>
+      <link>/tag/lubridate/</link>
     </image>
     
     <item>
       <title>Handling Dates and Times in R</title>
-      <link>https://sdgamboa.github.io/post/2020_uber/</link>
+      <link>/post/2020_uber/</link>
       <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2020_uber/</guid>
+      <guid>/post/2020_uber/</guid>
       <description>&lt;p&gt;The other day I requested my rides data to Uber (&lt;a href=&#34;https://help.uber.com/riders/article/download-your-data?nodeId=2c86900d-8408-4bac-b92a-956d793acd11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;). They replied with a convenient csv file containing detailed information of every ride I took between 2016 and 2019. The dataset included dates and times in UTC format. I used this dataset to try some functions of the lubridate package for handling dates and times in R.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Load packages
 library(tidyverse)

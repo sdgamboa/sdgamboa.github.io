@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rstats | Samuel David Gamboa-Tuz, Ph.D.</title>
-    <link>https://sdgamboa.github.io/tag/rstats/</link>
-      <atom:link href="https://sdgamboa.github.io/tag/rstats/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tag/rstats/</link>
+      <atom:link href="/tag/rstats/index.xml" rel="self" type="application/rss+xml" />
     <description>Rstats</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Samuel David Gamboa-Tuz, 2019-2022</copyright><lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://sdgamboa.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Rstats</title>
-      <link>https://sdgamboa.github.io/tag/rstats/</link>
+      <link>/tag/rstats/</link>
     </image>
     
     <item>
       <title>Visualization of Volcano Plots in R</title>
-      <link>https://sdgamboa.github.io/post/2020_volcano/</link>
+      <link>/post/2020_volcano/</link>
       <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2020_volcano/</guid>
+      <guid>/post/2020_volcano/</guid>
       <description>&lt;p&gt;A &lt;strong&gt;volcano plot&lt;/strong&gt; is a type of scatter plot commonly used in biology research to represent changes in the expression of hundreds or thousands of genes between samples. It&amp;rsquo;s the graphical representation of a differental expression analysis, which can be done with tools like EdgeR or DESeq2. Volcano plots indicate the &lt;strong&gt;fold change&lt;/strong&gt; (either positive or negative) in the x axis and a &lt;strong&gt;significance value&lt;/strong&gt; (such as the p-value or the adjusted p-value, i.e. FDR) in the y axis. Points represent individual genes and can be labeled or colored according to some attribute, such as whether they are up- or down-regulated, a significance threshold, etc.&lt;/p&gt;
 &lt;p&gt;In this post I&amp;rsquo;ll go through a step-by-step simple tutorial for the visualization of volcano plots in &lt;strong&gt;R&lt;/strong&gt; using tools from the &lt;strong&gt;tidyverse&lt;/strong&gt;, such as &lt;strong&gt;dplyr&lt;/strong&gt;, &lt;strong&gt;tidyr&lt;/strong&gt;, and &lt;strong&gt;ggplot2&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;r-packages-and-data&#34;&gt;R packages and data&lt;/h2&gt;
@@ -104,7 +104,7 @@ dim(data)
   ylab(expression(&amp;quot;-log&amp;quot;[10]*&amp;quot;FDR&amp;quot;))
 p1
 &lt;/code&gt;&lt;/pre&gt;
-&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/plot 1-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
+&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/plot 1-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
 &lt;p&gt;The dispersion of the points (representing genes) in the plot is similar to, you guessed, a volcano (that&amp;rsquo;s why they&amp;rsquo;re called volcano plots). Since the FDR values were transformed to their -log10, the higher the position of a point, the more significant its value is (y axis). Points with positive fold change values (to the right) are up-regulated and points with negative fold change values (to the left) are down-regulated (x axis).&lt;/p&gt;
 &lt;h2 id=&#34;adding-color-to-differentially-expressed-genes-degs&#34;&gt;Adding color to differentially expressed genes (DEGs)&lt;/h2&gt;
 &lt;p&gt;Differentially expressed genes (DEGs) are usally considered as those with an absolute fold change greater or equal to 2 and a FDR value of 0.05 or less. So, we can make our volcano plot a bit more informative if we add some color to the DEGs in the plot. To do so, we&amp;rsquo;ll add an additional column, named &amp;lsquo;Expression&amp;rsquo;, indicating whether the expression of a gene is up-regulated, down-regulated, or unchanged:&lt;/p&gt;
@@ -181,7 +181,7 @@ head(data) %&amp;gt;%
   guides(colour = guide_legend(override.aes = list(size=1.5))) 
 p2
 &lt;/code&gt;&lt;/pre&gt;
-&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
+&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;768&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
 &lt;p&gt;If we want to know how many genes are up- or down-regulated, or unchanged, we can use dplyr&amp;rsquo;s &lt;code&gt;count()&lt;/code&gt; function.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;% 
   count(Expression) %&amp;gt;% 
@@ -293,7 +293,7 @@ head(data) %&amp;gt;%
 
 p3
 &lt;/code&gt;&lt;/pre&gt;
-&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;
 &lt;p&gt;And we can count how many genes are up- or down-regulated according to the different significance thresholds with &lt;code&gt;count()&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data %&amp;gt;% 
   count(Expression, Significance) %&amp;gt;% 
@@ -541,7 +541,7 @@ top_genes %&amp;gt;%
                    size = 2)
 p3
 &lt;/code&gt;&lt;/pre&gt;
-&lt;img src=&#34;https://sdgamboa.github.io/post/2020_volcano/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;/post/2020_volcano/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;
 &lt;p&gt;So, only the top 10 up- and down-regulated genes are labeled, avoiding overcrowding.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;In this post we applied two different color schemes on a volcano plot and labeled a few genes using tools from the tidyverse.&lt;/p&gt;
@@ -582,9 +582,9 @@ toLatex(info, locale = FALSE)
     
     <item>
       <title>Handling Dates and Times in R</title>
-      <link>https://sdgamboa.github.io/post/2020_uber/</link>
+      <link>/post/2020_uber/</link>
       <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://sdgamboa.github.io/post/2020_uber/</guid>
+      <guid>/post/2020_uber/</guid>
       <description>&lt;p&gt;The other day I requested my rides data to Uber (&lt;a href=&#34;https://help.uber.com/riders/article/download-your-data?nodeId=2c86900d-8408-4bac-b92a-956d793acd11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;). They replied with a convenient csv file containing detailed information of every ride I took between 2016 and 2019. The dataset included dates and times in UTC format. I used this dataset to try some functions of the lubridate package for handling dates and times in R.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Load packages
 library(tidyverse)
