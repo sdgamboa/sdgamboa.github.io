@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Samuel D. Gamboa-Tuz
+title: Samuel Gamboa
 
 # Full name (for SEO)
 first_name: Samuel David
