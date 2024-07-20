@@ -21,8 +21,8 @@ role: Postdoctoral researcher
 
 # Organizations/Affiliations to display in Biography blox
 organizations:
-  - name: OpenAI
-    url: https://openai.com/
+  - name: City University of New York (CUNY)
+    url: https://cunyisph.org/team/samuel-gamboa/
 
 # Social network links
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.
