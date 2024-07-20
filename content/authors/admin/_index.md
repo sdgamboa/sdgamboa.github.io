@@ -1,9 +1,6 @@
 ---
 # Display name
-title: Samuel D. Gamboa Tuz
-
-# Name pronunciation (optional)
-name_pronunciation: Chien Shiung Wu
+title: Samuel Gamboa, PhD
 
 # Full name (for SEO)
 first_name: Samuel
