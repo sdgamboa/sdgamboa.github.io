@@ -49,8 +49,8 @@ interests:
   - Coding
 
 education:
-  - area: PhD Biological Science (2020)
-    institution: Yucatan Center for Scientific Research, Mexico
+  - area: PhD Biological Science
+    institution: Yucatan Center for Scientific Research (CICY), Mexico
     date_start: 2016-01-01
     date_end: 2020-12-31
    # summary: |
@@ -58,8 +58,8 @@ education:
    # button:
    #   text: 'Read Thesis'
    #   url: 'https://example.com'
-  - area: MSc Biological Science (2015)
-    institution: Yucatan Center for Scientific Research, Mexico
+  - area: MSc Biological Science
+    institution: Yucatan Center for Scientific Research (CICY), Mexico
     date_start: 2013-01-01
     date_end: 2015-12-31
     #summary: |
@@ -69,8 +69,8 @@ education:
 #      - lorem ipsum dolor sit amet, consectetur adipiscing elit
 #      - lorem ipsum dolor sit amet, consectetur adipiscing elit
 #      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - area: BSc Biology (2013)
-    institution: Autonomous University of Yucatan, Mexico
+  - area: BSc in Biology
+    institution: Autonomous University of Yucatan (UADY), Mexico
     date_start: 2006-01-01
     date_end: 2013-12-31
     #summary: |
@@ -81,62 +81,66 @@ education:
     #  - lorem ipsum dolor sit amet, consectetur adipiscing elit
     #  - lorem ipsum dolor sit amet, consectetur adipiscing elit
 work:
-  - position: Director of Cloud Infrastructure
-    company_name: GenCoin
-    company_url: ''
+  - position: Postdoctoral researcher
+    company_name: City University of New York (CUNY)
+    company_url: https://cunyisph.org/team/samuel-gamboa/
     company_logo: ''
-    date_start: 2021-01-01
+    date_start: 2021-03-01
     date_end: ''
     summary: |2-
-      Responsibilities include:
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - position: Backend Software Engineer
-    company_name: X
-    company_url: ''
-    company_logo: ''
-    date_start: 2016-01-01
-    date_end: 2020-12-31
-    summary: |
-      Responsibilities include:
-      - Migrated infrastructure to a new data center
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
+      Projects include:
+      - Bugphyzz
+      - MicrobiomeBenchmarkData
+      - BugSigDB
+      - CuratedMetagenomicData
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
 skills:
   - name: Technical Skills
     items:
-      - name: Python
+      - name: R programming
         description: ''
         percent: 80
-        icon: code-bracket
-      - name: Data Science
+        icon: ""
+#        icon: code-bracket
+      - name: SAS programming
         description: ''
-        percent: 100
-        icon: chart-bar
-      - name: SQL
+        percent: 10
+        icon: ""
+      - name: Linux/Bash scripting
         description: ''
         percent: 40
-        icon: circle-stack
-  - name: Hobbies
-    color: '#eeac02'
-    color_border: '#f0bf23'
-    items:
-      - name: Hiking
+        icon: ""
+      - name: Data analysis
         description: ''
-        percent: 60
-        icon: person-simple-walk
-      - name: Cats
+        percent: 70
+        icon: ""
+#        icon: chart-bar
+      - name: Molecular biology
         description: ''
-        percent: 100
-        icon: cat
-      - name: Photography
-        description: ''
-        percent: 80
-        icon: camera
+        percent: 90
+        icon: ""
+#      - name: SQL
+#        description: ''
+#        percent: 40
+#        icon: circle-stack
+#  - name: Hobbies
+#    color: '#eeac02'
+#    color_border: '#f0bf23'
+#    items:
+#      - name: Hiking
+#        description: ''
+#        percent: 60
+#        icon: person-simple-walk
+#      - name: Cats
+#        description: ''
+#        percent: 100
+#        icon: cat
+#      - name: Photography
+#        description: ''
+#        percent: 80
+#        icon: camera
 
 languages:
   - name: English 
