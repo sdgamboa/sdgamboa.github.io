@@ -50,7 +50,7 @@ interests:
 
 education:
   - area: PhD Biological Science
-    institution: Yucatan Center for Scientific Research (CICY), Mexico
+    institution: Yucatan Scientific Research Center 
     date_start: 2016-01-01
     date_end: 2020-12-31
    # summary: |
@@ -59,7 +59,7 @@ education:
    #   text: 'Read Thesis'
    #   url: 'https://example.com'
   - area: MSc Biological Science
-    institution: Yucatan Center for Scientific Research (CICY), Mexico
+    institution: Yucatan Scientific Research Center
     date_start: 2013-01-01
     date_end: 2015-12-31
     #summary: |
@@ -70,7 +70,7 @@ education:
 #      - lorem ipsum dolor sit amet, consectetur adipiscing elit
 #      - lorem ipsum dolor sit amet, consectetur adipiscing elit
   - area: BSc in Biology
-    institution: Autonomous University of Yucatan (UADY), Mexico
+    institution: Autonomous University of Yucatan
     date_start: 2006-01-01
     date_end: 2013-12-31
     #summary: |
@@ -82,7 +82,7 @@ education:
     #  - lorem ipsum dolor sit amet, consectetur adipiscing elit
 work:
   - position: Postdoctoral researcher
-    company_name: City University of New York (CUNY)
+    company_name: City University of New York
     company_url: https://cunyisph.org/team/samuel-gamboa/
     company_logo: ''
     date_start: 2021-03-01
@@ -98,6 +98,8 @@ work:
 # Add your own SVG icons to `assets/media/icons/`
 skills:
   - name: Technical Skills
+    color: '#eeac02'
+    color_border: '#f0bf23'
     items:
       - name: R programming
         description: ''
