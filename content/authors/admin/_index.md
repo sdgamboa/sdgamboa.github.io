@@ -49,7 +49,7 @@ interests:
   - Coding
 
 education:
-  - area: PhD Biological Science
+  - area: PhD in Biological Sciences
     institution: Yucatan Scientific Research Center 
     date_start: 2016-01-01
     date_end: 2020-12-31
@@ -58,7 +58,7 @@ education:
    # button:
    #   text: 'Read Thesis'
    #   url: 'https://example.com'
-  - area: MSc Biological Science
+  - area: MSc in Biological Sciences
     institution: Yucatan Scientific Research Center
     date_start: 2013-01-01
     date_end: 2015-12-31
@@ -146,7 +146,7 @@ skills:
 
 languages:
   - name: English 
-    percent: 85
+    percent: 90
   - name: Spanish 
     percent: 100
 
