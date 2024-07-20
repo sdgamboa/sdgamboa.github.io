@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Samuel Gamboa, PhD
+title: Samuel D. Gamboa-Tuz, PhD
 
 # Full name (for SEO)
 first_name: Samuel
@@ -8,7 +8,7 @@ last_name: Gamboa
 
 # Status emoji
 status:
-  icon: ☕️
+  icon: 
 
 # Is this the primary user of the site?
 superuser: true
@@ -28,58 +28,58 @@ organizations:
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.
 profiles:
   - icon: at-symbol
-    url: 'mailto:your-email@example.com'
+    url: 'mailto:samuel.gamboa.tuz@gmail.com'
     label: E-mail Me
-  - icon: brands/x
-    url: https://twitter.com/GetResearchDev
-  - icon: brands/instagram
-    url: https://www.instagram.com/
-  - icon: brands/github
-    url: https://github.com/gcushen
   - icon: brands/linkedin
-    url: https://www.linkedin.com/
+    url: https://www.linkedin.com/in/sdgamboa
+  - icon: brands/github
+    url: https://github.com/sdgamboa
   - icon: academicons/google-scholar
-    url: https://scholar.google.com/
+    url: https://scholar.google.com/citations?user=FSEfjWQAAAAJ&hl=en
   - icon: academicons/orcid
-    url: https://orcid.org/
+    url: https://orcid.org/0000-0002-6863-7943
+ # - icon: brands/x
+ #   url: https://twitter.com/samueldgamboa
 
 interests:
-  - Artificial Intelligence
-  - Computational Linguistics
-  - Information Retrieval
+  - Clinical research
+  - Biology
+  - Bioinformatics
+  - Software development
+  - Coding
 
 education:
-  - area: PhD Artificial Intelligence
-    institution: Stanford University
+  - area: PhD Biological Science (2020)
+    institution: Yucatan Center for Scientific Research, Mexico
     date_start: 2016-01-01
     date_end: 2020-12-31
-    summary: |
-      Thesis on _Why LLMs are awesome_. Supervised by [Prof Joe Smith](https://example.com). Presented papers at 5 IEEE conferences with the contributions being published in 2 Springer journals.
-    button:
-      text: 'Read Thesis'
-      url: 'https://example.com'
-  - area: MEng Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    date_start: 2016-01-01
-    date_end: 2020-12-31
-    summary: |
-      GPA: 3.8/4.0
+   # summary: |
+   #   Thesis on _Why LLMs are awesome_. Supervised by [Prof Joe Smith](https://example.com). Presented papers at 5 IEEE conferences with the contributions being published in 2 Springer journals.
+   # button:
+   #   text: 'Read Thesis'
+   #   url: 'https://example.com'
+  - area: MSc Biological Science (2015)
+    institution: Yucatan Center for Scientific Research, Mexico
+    date_start: 2013-01-01
+    date_end: 2015-12-31
+    #summary: |
+    #  GPA: 3.8/4.0
 
-      Courses included:
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - area: BSc Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    date_start: 2016-01-01
-    date_end: 2020-12-31
-    summary: |
-      GPA: 3.4/4.0
+#      Courses included:
+#      - lorem ipsum dolor sit amet, consectetur adipiscing elit
+#      - lorem ipsum dolor sit amet, consectetur adipiscing elit
+#      - lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - area: BSc Biology (2013)
+    institution: Autonomous University of Yucatan, Mexico
+    date_start: 2006-01-01
+    date_end: 2013-12-31
+    #summary: |
+    #  GPA: 3.4/4.0
       
-      Courses included:
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
+    #  Courses included:
+    #  - lorem ipsum dolor sit amet, consectetur adipiscing elit
+    #  - lorem ipsum dolor sit amet, consectetur adipiscing elit
+    #  - lorem ipsum dolor sit amet, consectetur adipiscing elit
 work:
   - position: Director of Cloud Infrastructure
     company_name: GenCoin
@@ -139,12 +139,10 @@ skills:
         icon: camera
 
 languages:
-  - name: English
+  - name: English 
+    percent: 85
+  - name: Spanish 
     percent: 100
-  - name: Chinese
-    percent: 75
-  - name: Portuguese
-    percent: 25
 
 # Awards.
 #   Add/remove as many awards below as you like.
@@ -180,4 +178,14 @@ awards:
 
 ## About Me
 
-Chien Shiung Wu is a professor of artificial intelligence at the Stanford AI Lab. Her research interests include distributed robotics, mobile computing and programmable matter. She leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
+
+
+I'm a biologist with experience in bioinformatics, data analysis, and molecular biology. Currently, I'm looking for an entry-level position in clinical research.
+
+My academic journey began in Mexico, where I completed my graduate studies and gained hands-on experience in molecular biology techniques and the use of computational tools for analyzing massive DNA sequencing data.
+
+Currently, I am a postdoctoral researcher at the City University of New York (CUNY). Here, I focus on developing software packages in R to advance microbiome research. My role involves both the creation and implementation of these tools, enabling new data analysis workflows that drive meaningful insights in the field.
+
+In addition to my programming expertise in R, I am proficient in Linux, and continually seek opportunities to expand my knowledge and skills in data analysis and programming.
+
+I am particularly interested in exploring new avenues in clinical research to further diversify my experience and contribute to impactful scientific discoveries.
