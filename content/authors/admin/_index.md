@@ -178,9 +178,7 @@ awards:
 
 ## About Me
 
-
-
-I'm a biologist with experience in bioinformatics, data analysis, and molecular biology. Currently, I'm looking for an entry-level position in clinical research.
+I'm a biologist with experience in bioinformatics, data analysis, and molecular biology. Currently, I'm **looking for an entry-level position in clinical research**.
 
 My academic journey began in Mexico, where I completed my graduate studies and gained hands-on experience in molecular biology techniques and the use of computational tools for analyzing massive DNA sequencing data.
 
