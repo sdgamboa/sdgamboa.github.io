@@ -38,8 +38,8 @@ profiles:
     url: https://scholar.google.com/citations?user=FSEfjWQAAAAJ&hl=en
   - icon: academicons/orcid
     url: https://orcid.org/0000-0002-6863-7943
- # - icon: brands/x
- #   url: https://twitter.com/samueldgamboa
+  - icon: brands/x
+    url: https://twitter.com/samueldgamboa
 
 interests:
   - Clinical research
