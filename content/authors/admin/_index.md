@@ -1,10 +1,10 @@
 ---
 # Display name
-title: Samuel D. Gamboa-Tuz, PhD
+title: Samuel D. Gamboa-Tuz
 
 # Full name (for SEO)
-first_name: Samuel
-last_name: Gamboa
+first_name: Samuel David
+last_name: Gamboa Tuz
 
 # Status emoji
 status:
