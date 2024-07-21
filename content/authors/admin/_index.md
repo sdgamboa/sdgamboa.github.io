@@ -114,6 +114,10 @@ skills:
         description: ''
         percent: 40
         icon: ""
+      - name: Python programming 
+        description: ''
+        percent: 25
+        icon: ""
       - name: Data analysis
         description: ''
         percent: 70
