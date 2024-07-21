@@ -184,12 +184,12 @@ languages:
 
 ## About Me
 
-I'm a biologist with experience in bioinformatics, data analysis, and molecular biology. Currently, I'm **looking for an entry-level position in clinical research**.
+I am a biologist with expertise in molecular biology, bioinformatics, software development, and data analysis. I am now eager to transition into a career in clinical research and am seeking an entry-level position to start this new chapter.
 
-My academic journey began in Mexico, where I completed my graduate studies and gained hands-on experience in molecular biology techniques and the use of computational tools for analyzing massive DNA sequencing data.
+I hold a BSc in Biology from the Autonomous University of Yucatan (MX) and both an MSc and PhD in Biological Science from the Yucatan Scientific Research Center (MX). My academic background has provided me with a strong foundation in molecular biology and bioinformatics, equipping me with the skills needed to analyze complex biological data and conduct thorough research.
 
-Currently, I am a postdoctoral researcher at the City University of New York (CUNY). Here, I focus on developing software packages in R to advance microbiome research. My role involves both the creation and implementation of these tools, enabling new data analysis workflows that drive meaningful insights in the field.
+During my postdoctoral research at The City University of New York, I focused on microbiome studies, utilizing R programming, Linux, and Python. I developed and maintained several R packages, which enhanced the efficiency and reproducibility of data analysis in our projects. This experience solidified my expertise in software development and bioinformatics, making me adept at handling large datasets and complex computational tasks.
 
-In addition to my programming expertise in R, I am proficient in Linux, and continually seek opportunities to expand my knowledge and skills in data analysis and programming.
+Additionally, my experience has equipped me with valuable soft skills, including project management, effective communication, teamwork, and attention to detail. I have successfully led collaborative projects, trained junior researchers, and presented my findings at international conferences. My ability to adapt and learn has been instrumental in navigating the dynamic field of biological research.
 
-I am particularly interested in exploring new avenues in clinical research to further diversify my experience and contribute to impactful scientific discoveries.
+I am excited to bring my diverse skill set and passion for scientific discovery to a clinical research role, where I can contribute to advancing healthcare.
