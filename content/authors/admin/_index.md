@@ -101,20 +101,20 @@ skills:
     color: '#eeac02'
     color_border: '#f0bf23'
     items:
-      - name: R programming
+      - name: R
         description: ''
         percent: 80
         icon: ""
 #        icon: code-bracket
-      - name: SAS programming
+      - name: SAS
         description: ''
         percent: 10
         icon: ""
-      - name: Linux/Bash scripting
+      - name: Linux/Bash
         description: ''
         percent: 40
         icon: ""
-      - name: Python programming 
+      - name: Python
         description: ''
         percent: 25
         icon: ""
