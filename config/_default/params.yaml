@@ -41,7 +41,7 @@ header:
 # Site footer
 footer:
   copyright:
-    notice: '© {year} Samuel Gamboa. This work is licensed under {license}'
+    notice: '© {year} <a href="https://github.com/sdgamboa" target="_blank">Samuel Gamboa</a>. This work is licensed under {license}. Access the <a href="https://github.com/sdgamboa/sdgamboa.github.io" target="_blank">source code</a> of this site.'
     license:
       enable: true
       allow_derivatives: false
