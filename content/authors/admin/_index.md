@@ -190,6 +190,6 @@ I hold a BSc in Biology from the Autonomous University of Yucatan (MX) and both 
 
 During my postdoctoral research at The City University of New York, I focused on microbiome studies, utilizing R programming, Linux, and Python. I developed and maintained several R packages, which enhanced the efficiency and reproducibility of data analysis in our projects. This experience solidified my expertise in software development and bioinformatics, making me adept at handling large datasets and complex computational tasks.
 
-Additionally, my experience has equipped me with valuable soft skills, including project management, effective communication, teamwork, and attention to detail. I have successfully led collaborative projects, trained junior researchers, and presented my findings at international conferences. My ability to adapt and learn has been instrumental in navigating the dynamic field of biological research.
+Additionally, my experience has equipped me with valuable soft skills, including project management, effective communication, teamwork, and attention to detail. I have actively collaborated on various projects, trained junior researchers, and presented my findings at international conferences. My ability to adapt and learn has been instrumental in navigating the dynamic field of biological research.
 
 I am excited to bring my diverse skill set and passion for scientific discovery to a clinical research role, where I can contribute to advancing healthcare.
