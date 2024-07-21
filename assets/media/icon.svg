@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="84.104286mm"
-   height="84.104286mm"
-   viewBox="0 0 84.104286 84.104286"
+   width="83.758659mm"
+   height="83.758659mm"
+   viewBox="0 0 83.758659 83.758659"
    version="1.1"
    id="svg1"
    inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
@@ -26,7 +26,7 @@
      inkscape:document-units="mm"
      inkscape:zoom="1.0771772"
      inkscape:cx="35.27739"
-     inkscape:cy="121.14999"
+     inkscape:cy="121.14998"
      inkscape:window-width="1920"
      inkscape:window-height="1111"
      inkscape:window-x="-9"
@@ -65,14 +65,13 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-162.8004,-123.74578)">
-    <rect
-       style="fill:#1a1a1a;stroke:#000000;stroke-width:0.1"
-       id="rect2"
-       width="84.004288"
-       height="84.004288"
-       x="162.8504"
-       y="123.79578" />
+     transform="translate(-162.80039,-123.99141)">
+    <circle
+       style="fill:#1a1a1a;stroke-width:0.0794872"
+       id="path3"
+       cx="204.67972"
+       cy="165.87074"
+       r="41.87933" />
     <text
        xml:space="preserve"
        style="font-style:italic;font-size:50.8px;line-height:1.3;font-family:Arial;-inkscape-font-specification:'Arial Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#f9f9f9;stroke:none;stroke-width:0.1"
