@@ -188,12 +188,13 @@ languages:
 
 ## About Me
 
-I am a biologist with expertise in molecular biology, bioinformatics, software development, and data analysis. I am now eager to transition into a career in clinical research and am seeking an entry-level position to start this new chapter.
+I am a biologist eager to transition into a career in clinical research.
 
-I hold a BSc in Biology from the Autonomous University of Yucatan (MX) and both an MSc and PhD in Biological Science from the Yucatan Scientific Research Center (MX). My academic background has provided me with a strong foundation in molecular biology and bioinformatics, equipping me with the skills needed to analyze complex biological data and conduct thorough research.
+My experience in academic research as a graduate student and postdoctoral researcher has equipped me with essential skills applicable to clinical research, including project management, effective communication, teamwork, and attention to detail. 
 
-During my postdoctoral research at The City University of New York, I focused on microbiome studies, utilizing R programming, Linux, and Python. I developed and maintained several R packages, which enhanced the efficiency and reproducibility of data analysis in our projects. This experience solidified my expertise in software development and bioinformatics, making me adept at handling large datasets and complex computational tasks.
+I have actively collaborated on various projects, trained junior researchers, written manuscripts, and presented my work at international conferences. 
 
+My adaptability and commitment to continuous learning have been crucial in navigating the dynamic field of biological research.
 Additionally, my experience has equipped me with valuable soft skills, including project management, effective communication, teamwork, and attention to detail. I have actively collaborated on various projects, trained junior researchers, and presented my findings at international conferences. My ability to adapt and learn has been instrumental in navigating the dynamic field of biological research.
 
 I am excited to bring my diverse skill set and passion for scientific discovery to a clinical research role, where I can contribute to advancing healthcare.
