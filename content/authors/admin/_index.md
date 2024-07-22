@@ -195,6 +195,3 @@ My experience in academic research as a graduate student and postdoctoral resear
 I have actively collaborated on various projects, trained junior researchers, written manuscripts, and presented my work at international conferences. 
 
 My adaptability and commitment to continuous learning have been crucial in navigating the dynamic field of biological research.
-Additionally, my experience has equipped me with valuable soft skills, including project management, effective communication, teamwork, and attention to detail. I have actively collaborated on various projects, trained junior researchers, and presented my findings at international conferences. My ability to adapt and learn has been instrumental in navigating the dynamic field of biological research.
-
-I am excited to bring my diverse skill set and passion for scientific discovery to a clinical research role, where I can contribute to advancing healthcare.
