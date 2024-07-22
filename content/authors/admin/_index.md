@@ -87,13 +87,7 @@ work:
     company_logo: ''
     date_start: 2021-03-01
     date_end: ''
-    summary: |2-
-      Projects include:
-      - Bugphyzz
-      - MicrobiomeBenchmarkData
-      - BugSigDB
-      - CuratedMetagenomicData
-
+    #summary: |2-
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
 skills:
