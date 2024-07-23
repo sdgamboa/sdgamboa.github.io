@@ -184,7 +184,7 @@ languages:
 
 I am a biologist eager to transition into a career in clinical research.
 
-My experience in academic research as a graduate student and postdoctoral researcher has equipped me with essential skills applicable to clinical research, including project management, effective communication, teamwork, and attention to detail.
+My experience in academic research as a graduate student and postdoctoral researcher has equipped me with essential skills applicable to clinical research, including project management, effective communication, teamwork, attention to detail, and adherence to protocols and standards.
 
 I have actively collaborated on various projects, trained junior researchers, written manuscripts, and presented my work at international conferences.
 
