@@ -17,11 +17,11 @@ superuser: true
 highlight_name: true
 
 # Role/position/tagline
-role: Postdoctoral researcher
+role: Bioinformatics Analyst/Postdoctoral researcher
 
 # Organizations/Affiliations to display in Biography blox
 organizations:
-  - name: City University of New York (CUNY)
+  - name: City University of New York (CUNY) - ISPH
     url: https://cunyisph.org/team/samuel-gamboa/
 
 # Social network links
@@ -40,6 +40,8 @@ profiles:
     url: https://orcid.org/0000-0002-6863-7943
   - icon: brands/x
     url: https://twitter.com/samueldgamboa
+  - icon: brands/bluesky
+    url: https://bsky.app/profile/samueldgamboa.bsky.social
 
 interests:
   - Clinical research
@@ -81,7 +83,7 @@ education:
     #  - lorem ipsum dolor sit amet, consectetur adipiscing elit
     #  - lorem ipsum dolor sit amet, consectetur adipiscing elit
 work:
-  - position: Postdoctoral researcher
+  - position: Bioinformatics Analyst/Postdoctoral researcher
     company_name: City University of New York
     company_url: https://cunyisph.org/team/samuel-gamboa/
     company_logo: ''
@@ -182,14 +184,9 @@ languages:
 
 ## About Me
 
-I am a biologist eager to transition into a career in clinical research.
+I am a biologist with a strong research background in molecular biology and bioinformatics.
 
-My experience in academic research as a graduate student and postdoctoral researcher has equipped me with essential skills applicable to clinical research, including project management, effective communication, teamwork, attention to detail, and adherence to protocols and standards.
+In my current role as a Bioinformatics Analyst and Postdoctoral Researcher in [Levi's Waldron Lab](https://waldronlab.io/) at the 
+CUNY Institute for Implementation Science in Population Health (ISPH), I develop innovative computational tools and resources to advance human microbiome research.
 
-I have actively collaborated on various projects, trained junior researchers, written manuscripts, and presented my work at international conferences.
-
-My adaptability and commitment to continuous learning have been crucial in navigating the dynamic field of biological research.
-
-Additionally, my experience in data preparation and analysis, along with my software development skills in R, has given me a strong data analytic mindset and problem-solving abilities.
-
-I am excited to bring my diverse skill set and passion for scientific discovery to a clinical research entry-level role, where I can contribute to advancing healthcare.
+I'm currently interested in transitioning into the field of clinical research.
