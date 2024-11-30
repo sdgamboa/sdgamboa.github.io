@@ -184,9 +184,8 @@ languages:
 
 ## About Me
 
-I am a biologist with a strong research background in molecular biology and bioinformatics.
+I am a biologist with a background in molecular biology and bioinformatics.
 
-In my current role as a Bioinformatics Analyst and Postdoctoral Researcher in [Levi's Waldron Lab](https://waldronlab.io/) at the 
-CUNY Institute for Implementation Science in Population Health (ISPH), I develop innovative computational tools and resources to advance human microbiome research.
+In my current role as a Bioinformatics Analyst and Postdoctoral Researcher at the [Waldron Lab](https://waldronlab.io/) (CUNY - ISPH), I develop computational tools and resources to advance human microbiome research.
 
-I'm currently interested in transitioning into the field of clinical research.
+I'm interested in transitioning into the field of clinical research.
