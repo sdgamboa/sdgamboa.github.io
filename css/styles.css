@@ -50,8 +50,47 @@ li {
     line-height: 1.4;
 }
   
-  li a {
+li a {
     display: inline;   /* important so bullets align */
     vertical-align: middle;
 }
 
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+  
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#navbar {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+  
+body.dark-mode #navbar {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+.social-link {
+    color: black;
+    transition: color 0.3s;
+}
+  
+/* Dark mode */
+body.dark-mode .social-link {
+    color: white;
+}
+
+.social-link:hover {
+    color: #00bcd4; /* LinkedIn blue */
+}
+
+body.dark-mode .social-link:hover {
+    color: #00bcd4;
+}
