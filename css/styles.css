@@ -1,0 +1,57 @@
+.profile-pic {
+    width: 200px;        /* Make sure width = height */
+    height: 200px;
+    object-fit: cover;   /* Ensures the image fills the circle */
+    border-radius: 50%;  /* Makes it circular */
+    border: 3px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+ 
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;         /* Good vertical space in paragraphs */
+}
+  
+section {
+    margin-bottom: 3rem;      /* Generous white space between sections */
+    padding: 2rem 1rem;       /* Padding inside sections */
+    text-align: center;
+}
+
+section img {
+    display: inline-block;  /* makes the image respect text-align */
+    max-width: 100%;        /* optional: keeps image responsive */
+    height: auto;
+}
+
+.navbar {
+    background-color: #333;      /* Dark background */
+    color: white;                /* White text */
+    padding: 1rem 2rem;          /* Space inside navbar */
+    display: flex;               /* Flexbox for layout */
+    align-items: center;         /* Vertically center items */
+    position: sticky;            /* Sticks to top on scroll */
+    top: 0;
+    z-index: 1000;               /* On top of other content */
+}
+  
+.site-title {
+    margin: 0;                  /* Remove default margin */
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+ul {
+    padding-left: 40px;  /* standard indent for bullets */
+    margin: 0;
+}
+  
+li {
+    line-height: 1.4;
+}
+  
+  li a {
+    display: inline;   /* important so bullets align */
+    vertical-align: middle;
+}
+
